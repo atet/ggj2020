@@ -16,7 +16,7 @@ namespace Client
       static void Main(string[] args)
       {
          Send();
-         //Read();
+         Read();
       }
 
       static void Send()

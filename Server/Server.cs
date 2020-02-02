@@ -82,7 +82,8 @@ namespace Server
          Image clientImage = Image.FromStream(ms);
 
 
-         string filePath = "../html/images/" + currentImageCounter + ".jpg"; currentImageCounter++; if(currentImageCounter > 12){currentImageCounter = 1;}
+         string filePath = "../html/images/" + currentImageCounter + ".jpg"; 
+         clientImage.Save(filePath);
 
          // Send back to client
          string serverMessageString = TimeStamp() + " | Received image save as: " + filePath;
@@ -92,7 +93,7 @@ namespace Server
          // Save out
          // string filePath = "./" + TimeStamp() + ".jpg";
 
-         clientImage.Save(filePath);
+currentImageCounter++; if(currentImageCounter > 12){currentImageCounter = 1;}
       }
       static void SendReadOnStreamString(NetworkStream stream, string serverMessageString, int byteArraySize)
       {
