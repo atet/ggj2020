@@ -5,16 +5,17 @@ using System.IO;
 
 class Client
 { 
+   const int maxByteArraySize = 102400;
    static void Main(string[] args)
    {
-      // string dirRead = ".\\imageRead\\";
-      // RequestImageSaveToFile(dirRead, "01", "165.227.54.194");
-      // // RequestImageSaveToFile(dirRead, "01", "127.0.0.1");
+      string dirRead = ".\\imageRead\\";
+      RequestImageSaveToFile(dirRead, "01", "165.227.54.194");
+      // RequestImageSaveToFile(dirRead, "01", "127.0.0.1");
 
-      string filePathSend;
-      filePathSend = ".\\imageSend\\01.jpg";
-      SendImageFromFile(filePathSend, "client1", "165.227.54.194");
-      // SendImageFromFile(filePathSend, "client1", "127.0.0.1");
+      // string filePathSend;
+      // filePathSend = ".\\imageSend\\01.jpg";
+      // SendImageFromFile(filePathSend, "client1", "165.227.54.194");
+      // // SendImageFromFile(filePathSend, "client1", "127.0.0.1");
 
       // filePathSend = ".\\imageSend\\01.jpg";
       // SendImageFromFile(filePathSend, "client1");
@@ -165,7 +166,7 @@ class Client
 
    //    return clientImage;
    // }
-   static void SendReadOnStream(NetworkStream stream, Byte[] clientMessageByteArray, int byteArraySize = 1024000)
+   static void SendReadOnStream(NetworkStream stream, Byte[] clientMessageByteArray, int byteArraySize = maxByteArraySize)
    {
       System.Console.WriteLine("A " + clientMessageByteArray.Length.ToString());
       stream.Write(clientMessageByteArray, 0, clientMessageByteArray.Length);
@@ -189,7 +190,7 @@ class Client
       imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
       return ms.ToArray();
    }
-   public static Image ReadImageStream(NetworkStream stream, int byteArraySize = 1024000) // Image
+   public static Image ReadImageStream(NetworkStream stream, int byteArraySize = maxByteArraySize) // Image
    {
       Byte[] byteArray = new Byte[byteArraySize];
       int bytes = stream.Read(byteArray, 0, byteArray.Length);
