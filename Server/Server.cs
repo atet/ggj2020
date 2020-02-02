@@ -16,6 +16,7 @@ namespace Server
 
       public void ReceiveSendOnStream(Object obj)
       {
+
          TcpClient client = (TcpClient)obj;
          NetworkStream stream = client.GetStream();
 
@@ -29,7 +30,8 @@ namespace Server
             }
             if(command == "<READ>")
             {
-               SendReadOnStreamString(stream, "READ FROM SERVER", 1024);
+               //SendReadOnStreamString(stream, "READ FROM SERVER", 1024);
+               SendReadOnStreamImage(stream, ".\\*_IMAGE_FROM_CLIENT.jpg");
             }
 
             client.Close();
@@ -41,7 +43,21 @@ namespace Server
             System.Console.WriteLine(TimeStamp() + " | Forcibly closed connection!");
          }
       }
+      static void SendReadOnStreamImage(NetworkStream stream, string filePath)
+      {
+         // Read in image locally
+         MemoryStream ms = new MemoryStream();
+         Image.FromFile(filePath).Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+         Byte[] imageByteArray = ms.ToArray();
 
+         // Send to client
+         WriteStreamByteArray(stream, imageByteArray);
+         System.Console.WriteLine(TimeStamp() + " | Sent: " + filePath);
+         // Received from client
+         string clientMessageString = ReadStreamString(stream, 1024);
+         System.Console.WriteLine(clientMessageString);
+         //return serverMessageString;
+      }
       static string ReadSendOnStreamString(NetworkStream stream, int byteArraySize)
       {
          // Received from client
