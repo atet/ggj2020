@@ -85,12 +85,12 @@ namespace Server
          string filePath = "./" + TimeStamp() + ".jpg";
          //string filePath = "../html/images/" + currentImageCounter + ".jpg"; currentImageCounter++;
          //string filePath = "./images/" + TimeStamp() + ".jpg";
-         string serverMessageString = TimeStamp() + " | Received image save as: " + filePath;
-         
+
          // Save out
          clientImage.Save(filePath);
 
          // Respond
+         string serverMessageString = TimeStamp() + " | Received image save as: " + filePath;
          WriteStreamString(stream, serverMessageString);
          Console.WriteLine(serverMessageString);
 
