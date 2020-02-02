@@ -9,8 +9,11 @@ class Client
    {
       string filePathSend;
 
-      filePathSend = ".\\imageSend\\01.jpg";
-      SendImageFromFile(filePathSend, "client1", "165.227.54.194");
+      string dirRead = ".\\imageRead\\";
+      RequestImageSaveToFile(dirRead, "01", "165.227.54.194");
+
+      // filePathSend = ".\\imageSend\\01.jpg";
+      // SendImageFromFile(filePathSend, "client1", "165.227.54.194");
 
       // filePathSend = ".\\imageSend\\01.jpg";
       // SendImageFromFile(filePathSend, "client1");
