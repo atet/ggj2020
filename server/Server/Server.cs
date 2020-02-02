@@ -77,11 +77,13 @@ class Server
 
             // Saved to where images will be pulled from
             string filename = TimeStamp() + "_" + clientID + "_" + levelID + ".jpg";
-            clientImage.Save(".\\images\\" + levelID + "\\" + filename);
+            //clientImage.Save(".\\images\\" + levelID + "\\" + filename); // WINDOWS SLASH
+            clientImage.Save("./images/" + levelID + "/" + filename); // LINUX SLASH
             System.Console.WriteLine(TimeStamp() + ", " + clientID + " image saved as: " + filename);
 
             // Saved to html
-            clientImage.Save("..\\..\\html\\images\\" + levelID + ".jpg");
+            //clientImage.Save("..\\..\\html\\images\\" + levelID + ".jpg"); // WINDOWS SLASH
+            clientImage.Save("../../html/images/" + levelID + ".jpg"); // LINUX SLASH
 
             // Send file completion confirmation
             WriteStream(stream, TimeStamp() + ", " + clientID + " Image received.");
@@ -92,7 +94,8 @@ class Server
             // Initial Connection to get levelID for request
             levelID = ReadSendOnStreamConnect2(stream);
 
-            string[] filepaths = Directory.GetFiles(".\\images\\" + levelID);
+            //string[] filepaths = Directory.GetFiles(".\\images\\" + levelID); // WINDOWS SLASH
+            string[] filepaths = Directory.GetFiles("./images/" + levelID); // LINUX SLASH
             int randIdx = random.Next(0, filepaths.Length);
             System.Console.WriteLine("randIdx = " + randIdx + ", length = " + filepaths.Length);
             string filepath = filepaths[randIdx];
