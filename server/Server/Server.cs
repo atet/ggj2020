@@ -27,12 +27,20 @@ class Server
       {
          // Get command
          string command = ReadSendOnStreamCommand(stream);
+         if(command == "<COPY>")
+         {
+            // Check if
+            System.Console.WriteLine("\nCopying...\n");
+            Byte[] imageByteArray = imageToByteArray(Image.FromFile("./images/01/202002012353565004_client1small_01.jpg"));
+            clientImage.Save("./images/01/COPY.jpg");
+            System.Console.WriteLine("\nCopying Complete\n");
+         }
          if(command == "<SEND>")
          {
-            // Initial Connection to get clientID
+            // 1. Initial Connection to get clientID
             clientID = ReadSendOnStreamConnect(stream);
 
-            // Initial Connection to get clientID
+            // 2. Initial Connection to get levelID
             levelID = ReadSendOnStreamConnect3(stream);
             
             // Receiving image
@@ -42,17 +50,17 @@ class Server
 
             tCPClient.Close();
             
-            //System.Console.WriteLine("\nD\n");
+            System.Console.WriteLine("\nD\n");
             // Saved to where images will be pulled from
             string filename = TimeStamp() + "_" + clientID + "_" + levelID + ".jpg";
-            //System.Console.WriteLine("\nE\n");
+            System.Console.WriteLine("\nE\n");
             string filePath1 = saveDir1 + levelID + "/" + filename;
-            //System.Console.WriteLine("\nF\n");
-            //System.Console.WriteLine("filePath1: " + filePath1);
-            //System.Console.WriteLine("\nG\n");
+            System.Console.WriteLine("\nF\n");
+            System.Console.WriteLine("filePath1: " + filePath1);
+            System.Console.WriteLine("\nG\n");
             clientImage.Save(filePath1);
-            //System.Console.WriteLine("\nH\n");
-            //System.Console.WriteLine(TimeStamp() + ", " + clientID + " image saved as: " + filename);
+            System.Console.WriteLine("\nH\n");
+            System.Console.WriteLine(TimeStamp() + ", " + clientID + " image saved as: " + filename);
             // Saved to html dirs
             string filePath2 = saveDir2 + levelID + ".jpg";
             System.Console.WriteLine("filePath2: " + filePath2);
@@ -62,16 +70,15 @@ class Server
          }
          if(command == "<REQUEST>")
          {
-            // Initial Connection to get levelID for request
+            // 1. Initial Connection to get levelID for request
             levelID = ReadSendOnStreamConnect2(stream);
 
-            //string[] filepaths = Directory.GetFiles(".\\images\\" + levelID); // WINDOWS SLASH
-            string[] filepaths = Directory.GetFiles(saveDir1 + levelID); // LINUX SLASH
-            int randIdx = random.Next(0, filepaths.Length);
-            System.Console.WriteLine("randIdx = " + randIdx + ", length = " + filepaths.Length);
-            string filepath = filepaths[randIdx];
-
-            System.Console.WriteLine(filepath);
+                  // Determine save filepath
+                  string[] filepaths = Directory.GetFiles(saveDir1 + levelID);
+                  int randIdx = random.Next(0, filepaths.Length);
+                  System.Console.WriteLine("randIdx = " + randIdx + ", length = " + filepaths.Length);
+                  string filepath = filepaths[randIdx];
+                  System.Console.WriteLine(filepath);
             
             // Read in image locally
             Byte[] imageByteArray = imageToByteArray(Image.FromFile(filepath));
@@ -207,6 +214,7 @@ class Server
    {
       Byte[] byteArray = new Byte[byteArraySize];
       int bytes = stream.Read(byteArray, 0, byteArray.Length);
+      System.Console.WriteLine("Byte array size: " + bytes);
       return byteArrayToImage(byteArray);
    }
    static public Image byteArrayToImage(byte[] byteArrayIn)

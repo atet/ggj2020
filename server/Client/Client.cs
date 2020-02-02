@@ -8,14 +8,14 @@ class Client
    const int maxByteArraySize = 51200;
    static void Main(string[] args)
    {
-      string dirRead = ".\\imageRead\\";
-      RequestImageSaveToFile(dirRead, "01", "165.227.54.194");
-      // RequestImageSaveToFile(dirRead, "01", "127.0.0.1");
+      // string dirRead = ".\\imageRead\\";
+      // RequestImageSaveToFile(dirRead, "01", "165.227.54.194");
+      // // RequestImageSaveToFile(dirRead, "01", "127.0.0.1");
 
-      // string filePathSend;
-      // filePathSend = ".\\imageSend\\01.jpg";
-      // SendImageFromFile(filePathSend, "client1", "165.227.54.194");
-      // // SendImageFromFile(filePathSend, "client1", "127.0.0.1");
+      string filePathSend;
+      filePathSend = ".\\imageSend\\01.jpg";
+      SendImageFromFile(filePathSend, "client1", "165.227.54.194");
+      // SendImageFromFile(filePathSend, "client1", "127.0.0.1");
 
       // filePathSend = ".\\imageSend\\01.jpg";
       // SendImageFromFile(filePathSend, "client1");
@@ -70,14 +70,14 @@ class Client
       string levelID = Path.GetFileNameWithoutExtension(filePathSend);
       //System.Console.WriteLine(levelID);
 
-      // Connect to server and establish stream
+      // 1. Connect to server and establish stream
       TcpClient client = new TcpClient(serverIPAddress, serverPort);
       NetworkStream stream = client.GetStream();
 
-      // Send command
+      // 2. Send command
       SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes("<SEND>"));
 
-      // Send clientID
+      // 3. Send clientID
       SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes(clientID));
 
       // Send levelID
@@ -122,18 +122,18 @@ class Client
    // }
    public static void RequestImageSaveToFile(string dirRead, string levelID, string serverIPAddress = "127.0.0.1", int serverPort = 11000)
    {
-      // Connect to server and establish stream
+      // 1. Connect to server and establish stream
       TcpClient client = new TcpClient(serverIPAddress, serverPort);
       NetworkStream stream = client.GetStream();
 
-      // Send command
+      // 2. Send command
       SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes("<REQUEST>"));
 
-      // Send levelID
+      // 3. Send levelID
       SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes(levelID));
 
       // Receiving image
-      Image clientImage = ReadImageStream(stream, maxByteArraySize - 8);
+      Image clientImage = ReadImageStream(stream, maxByteArraySize);
       string filename = levelID + ".jpg";
       clientImage.Save(dirRead + filename);
 
