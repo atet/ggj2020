@@ -22,11 +22,11 @@ namespace Server
          try
          {
             string command = ReadSendOnStreamString(stream, 1024);
-            if(command == "SEND")
+            if(command == "<SEND>")
             {
                string readFromClient = ReadSendOnStreamString(stream, 1024);
             }
-            if(command == "READ")
+            if(command == "<READ>")
             {
                SendReadOnStreamString(stream, "READ FROM SERVER", 1024);
             }
@@ -43,8 +43,8 @@ namespace Server
 
       static string ReadSendOnStreamString(NetworkStream stream, int byteArraySize)
       {
-         // Received from client
-         string clientMessageString = ReadStreamString(stream, byteArraySize);
+         // // Received from client
+         // string clientMessageString = ReadStreamString(stream, byteArraySize);
          // Send back to client
          string serverMessageString = TimeStamp() + " | Received: " + clientMessageString;
          WriteStreamString(stream, serverMessageString);
