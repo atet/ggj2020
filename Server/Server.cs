@@ -77,7 +77,7 @@ namespace Server
       {
          // Received from client
          Byte[] byteArray = new Byte[byteArraySize];
-         int bytes = stream.Read(byteArray, 0, byteArray.Length);
+         int bytes = stream.Read(byteArray, 0, byteArraySize); //byteArray.Length);
          MemoryStream ms = new MemoryStream(byteArray);
          Image clientImage = Image.FromStream(ms);
 
