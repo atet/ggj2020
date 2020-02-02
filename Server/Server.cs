@@ -31,7 +31,7 @@ namespace Server
             if(command == "<READ>")
             {
                //SendReadOnStreamString(stream, "READ FROM SERVER", 1024);
-               SendReadOnStreamImage(stream, ".\\*_IMAGE_FROM_CLIENT.jpg");
+               SendReadOnStreamImage(stream, "./*_IMAGE_FROM_CLIENT.jpg");
             }
 
             client.Close();
