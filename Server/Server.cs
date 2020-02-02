@@ -28,7 +28,7 @@ namespace Server
             }
             if(command == "READ")
             {
-               SendReadOnStreamString(stream, "READ FROM SERVER", 1024)
+               SendReadOnStreamString(stream, "READ FROM SERVER", 1024);
             }
 
             client.Close();
