@@ -8,13 +8,15 @@ namespace Client
 {
    class Client
    {
-      const string serverIPAddress = "127.0.0.1"; const int serverPort = 11000;
+      //const string serverIPAddress = "127.0.0.1"; const int serverPort = 11000;
+      const string serverIPAddress = "ggj.atetkao.com"; const int serverPort = 11000;
       string clientID = "client1";
       string levelID = "01";
       string byteArrayLength = null;
       static void Main(string[] args)
       {
          Send();
+         Read();
       }
 
       static void Send()
@@ -23,7 +25,23 @@ namespace Client
          NetworkStream stream = client.GetStream();
          try
          {
-            SendReadOnStreamString(stream, "<COMMAND!>", 1024);
+            SendReadOnStreamString(stream, "<SEND>", 1024);
+            SendReadOnStreamString(stream, "PACKAGE FROM CLIENT", 1024);
+            stream.Close(); client.Close(); System.Console.WriteLine(TimeStamp() + " | Gracefully closed connection.");
+         }
+         catch
+         {
+            stream.Close(); client.Close(); System.Console.WriteLine(TimeStamp() + " | Forcibly closed connection!");
+         }
+      }
+      static void Read()
+      {
+         TcpClient client = new TcpClient(serverIPAddress, serverPort);
+         NetworkStream stream = client.GetStream();
+         try
+         {
+            SendReadOnStreamString(stream, "<READ>", 1024);
+            ReadSendOnStreamString(stream, 1024);
             stream.Close(); client.Close(); System.Console.WriteLine(TimeStamp() + " | Gracefully closed connection.");
          }
          catch
@@ -41,6 +59,16 @@ namespace Client
          string serverMessageString = ReadStreamString(stream, byteArraySize);
          System.Console.WriteLine(serverMessageString);
          //return serverMessageString;
+      }
+      static void ReadSendOnStreamString(NetworkStream stream, int byteArraySize)
+      {
+         // Received from server
+         string serverMessageString = ReadStreamString(stream, byteArraySize);
+         // Send back to server
+         string clientMessageString = TimeStamp() + " | Received: " + serverMessageString;
+         WriteStreamString(stream, clientMessageString);
+         Console.WriteLine(clientMessageString);
+         //return clientMessageString;
       }
       static string ReadStreamString(NetworkStream stream, int byteArraySize)
       {

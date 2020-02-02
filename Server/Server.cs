@@ -22,6 +22,15 @@ namespace Server
          try
          {
             string command = ReadSendOnStreamString(stream, 1024);
+            if(command == "SEND")
+            {
+               string readFromClient = ReadSendOnStreamString(stream, 1024);
+            }
+            if(command == "READ")
+            {
+               SendReadOnStreamString(stream, "READ FROM SERVER", 1024)
+            }
+
             client.Close();
             System.Console.WriteLine(TimeStamp() + " | Gracefully closed connection.");
          }
@@ -41,6 +50,16 @@ namespace Server
          WriteStreamString(stream, serverMessageString);
          Console.WriteLine(serverMessageString);
          return clientMessageString;
+      }
+      static void SendReadOnStreamString(NetworkStream stream, string serverMessageString, int byteArraySize)
+      {
+         // Send to client
+         WriteStreamString(stream, serverMessageString);
+         System.Console.WriteLine(TimeStamp() + " | Sent: " + serverMessageString);
+         // Received from client
+         string clientMessageString = ReadStreamString(stream, byteArraySize);
+         System.Console.WriteLine(clientMessageString);
+         //return serverMessageString;
       }
       static string ReadStreamString(NetworkStream stream, int byteArraySize)
       {
