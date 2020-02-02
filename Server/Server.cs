@@ -33,7 +33,7 @@ namespace Server
             {
                //SendReadOnStreamString(stream, "READ FROM SERVER", 1024);
                // REMEMBER, LINUX PATHS SLASHES
-               SendReadOnStreamImage(stream, "./1.jpg");
+               SendReadOnStreamImage(stream, "./10.jpg");
             }
 
             client.Close();
@@ -81,7 +81,7 @@ namespace Server
          MemoryStream ms = new MemoryStream(byteArray);
          Image clientImage = Image.FromStream(ms);
 
-         string filePath = "./1.jpg";
+         string filePath = "./10.jpg";
          //string filePath = "./" + TimeStamp() + ".jpg";
          //string filePath = "../html/images/" + currentImageCounter + ".jpg"; 
          clientImage.Save(filePath);
