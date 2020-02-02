@@ -72,10 +72,8 @@ class Server
             // Initial Connection to get clientID
             levelID = ReadSendOnStreamConnect3(stream);
             
-            System.Console.WriteLine("A");
             // Receiving image
             Image clientImage = ReadImageStream(stream);
-            System.Console.WriteLine("B");
 
             // Saved to where images will be pulled from
             string filename = TimeStamp() + "_" + clientID + "_" + levelID + ".jpg";

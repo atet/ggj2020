@@ -78,10 +78,9 @@ class Client
       // Send levelID
       SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes(levelID));
 
-      System.Console.WriteLine("A");
       // Body of communication, Wait to confirm receipt
       SendReadOnStream(stream, imageToByteArray(Image.FromFile(filePathSend)));
-      System.Console.WriteLine("B");
+      
       // Close stream communication
       stream.Close();
       client.Close();
