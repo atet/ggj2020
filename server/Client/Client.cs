@@ -79,41 +79,41 @@ class Client
       SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes(levelID));
 
       // Body of communication, Wait to confirm receipt
-      SendReadOnStream(stream, imageToByteArray(Image.FromFile(filePathSend)));
+      //SendReadOnStream(stream, imageToByteArray(Image.FromFile(filePathSend)));
       
-      // Close stream communication
-      //stream.Close();
-      //client.Close();
-      Console.ReadLine();
-            System.Console.WriteLine("F");
-   }
-   public static void SendImage(Image imageSend, string clientID, string levelID, string serverIPAddress = "127.0.0.1", int serverPort = 11000)
-   {
-      // ONLY ALPHANUMERIC FOR clientID
-
-      // levelID is the filename, e.g. 01, 02, 03,...
-      System.Console.WriteLine(levelID);
-
-      // Connect to server and establish stream
-      TcpClient client = new TcpClient(serverIPAddress, serverPort);
-      NetworkStream stream = client.GetStream();
-
-      // Send command
-      SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes("<SEND>"));
-
-      // Send clientID
-      SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes(clientID));
-
-      // Send levelID
-      SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes(levelID));
-
-      // Body of communication, Wait to confirm receipt
-      SendReadOnStream(stream, imageToByteArray(imageSend));
-
       // Close stream communication
       stream.Close();
       client.Close();
+
+      System.Console.WriteLine("F");
    }
+   // public static void SendImage(Image imageSend, string clientID, string levelID, string serverIPAddress = "127.0.0.1", int serverPort = 11000)
+   // {
+   //    // ONLY ALPHANUMERIC FOR clientID
+
+   //    // levelID is the filename, e.g. 01, 02, 03,...
+   //    System.Console.WriteLine(levelID);
+
+   //    // Connect to server and establish stream
+   //    TcpClient client = new TcpClient(serverIPAddress, serverPort);
+   //    NetworkStream stream = client.GetStream();
+
+   //    // Send command
+   //    SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes("<SEND>"));
+
+   //    // Send clientID
+   //    SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes(clientID));
+
+   //    // Send levelID
+   //    SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes(levelID));
+
+   //    // Body of communication, Wait to confirm receipt
+   //    SendReadOnStream(stream, imageToByteArray(imageSend));
+
+   //    // Close stream communication
+   //    stream.Close();
+   //    client.Close();
+   // }
    public static void RequestImageSaveToFile(string dirRead, string levelID, string serverIPAddress = "127.0.0.1", int serverPort = 11000)
    {
       // Connect to server and establish stream
@@ -137,29 +137,29 @@ class Client
       stream.Close();
       client.Close();
    }
-   public static Image RequestImage(string levelID, string serverIPAddress = "127.0.0.1", int serverPort = 11000)
-   {
-      // Connect to server and establish stream
-      TcpClient client = new TcpClient(serverIPAddress, serverPort);
-      NetworkStream stream = client.GetStream();
+   // public static Image RequestImage(string levelID, string serverIPAddress = "127.0.0.1", int serverPort = 11000)
+   // {
+   //    // Connect to server and establish stream
+   //    TcpClient client = new TcpClient(serverIPAddress, serverPort);
+   //    NetworkStream stream = client.GetStream();
 
-      // Send command
-      SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes("<REQUEST>"));
+   //    // Send command
+   //    SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes("<REQUEST>"));
 
-      // Send levelID
-      SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes(levelID));
+   //    // Send levelID
+   //    SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes(levelID));
 
-      // Receiving image
-      Image clientImage = ReadImageStream(stream);
+   //    // Receiving image
+   //    Image clientImage = ReadImageStream(stream);
 
-      System.Console.WriteLine("Received Image.");
+   //    System.Console.WriteLine("Received Image.");
 
-      // Close stream communication
-      stream.Close();
-      client.Close();
+   //    // Close stream communication
+   //    stream.Close();
+   //    client.Close();
 
-      return clientImage;
-   }
+   //    return clientImage;
+   // }
    static void SendReadOnStream(NetworkStream stream, Byte[] clientMessageByteArray, int byteArraySize = 1024000)
    {
       System.Console.WriteLine("A " + clientMessageByteArray.Length.ToString());

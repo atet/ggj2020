@@ -55,7 +55,20 @@ class Server
 
             // Send file completion confirmation
             // WriteStream(stream, TimeStamp() + ", " + clientID + " Image received.");
+
+            //----------------------------------------------
+
+
+
+
+
+
+
+
+
+
             tCPClient.Close();
+            System.Console.WriteLine("Done.");
          }
          if(command == "<REQUEST>")
          {
