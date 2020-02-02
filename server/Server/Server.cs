@@ -34,27 +34,27 @@ class Server
             levelID = ReadSendOnStreamConnect3(stream);
             
             // Receiving image
-            // Image clientImage = ReadImageStream(stream);
-            // System.Console.WriteLine("\nD\n");
-            // // Saved to where images will be pulled from
-            // string filename = TimeStamp() + "_" + clientID + "_" + levelID + ".jpg";
-            // System.Console.WriteLine("\nE\n");
-            // //string filePath1 = ".\\images\\" + levelID + "\\" + filename; // WINDOWS SLASH
-            // string filePath1 = "./images/" + levelID + "/" + filename; // LINUX SLASH
-            // System.Console.WriteLine("\nF\n");
-            // System.Console.WriteLine("filePath1: " + filePath1);
-            // System.Console.WriteLine("\nG\n");
-            // clientImage.Save(filePath1);
-            // System.Console.WriteLine("\nH\n");
-            // System.Console.WriteLine(TimeStamp() + ", " + clientID + " image saved as: " + filename);
+            Image clientImage = ReadImageStream(stream);
+            System.Console.WriteLine("\nD\n");
+            // Saved to where images will be pulled from
+            string filename = TimeStamp() + "_" + clientID + "_" + levelID + ".jpg";
+            System.Console.WriteLine("\nE\n");
+            //string filePath1 = ".\\images\\" + levelID + "\\" + filename; // WINDOWS SLASH
+            string filePath1 = "./images/" + levelID + "/" + filename; // LINUX SLASH
+            System.Console.WriteLine("\nF\n");
+            System.Console.WriteLine("filePath1: " + filePath1);
+            System.Console.WriteLine("\nG\n");
+            clientImage.Save(filePath1);
+            System.Console.WriteLine("\nH\n");
+            System.Console.WriteLine(TimeStamp() + ", " + clientID + " image saved as: " + filename);
             // Saved to html dirs
-            //string filePath2 = "..\\..\\html\\images\\" + levelID + ".jpg"; // WINDOWS SLASH
-            // string filePath2 = "../../html/images/" + levelID + ".jpg"; // LINUX SLASH
-            // System.Console.WriteLine("filePath2: " + filePath2);
-            // clientImage.Save(filePath2);
+            string filePath2 = "..\\..\\html\\images\\" + levelID + ".jpg"; // WINDOWS SLASH
+            string filePath2 = "../../html/images/" + levelID + ".jpg"; // LINUX SLASH
+            System.Console.WriteLine("filePath2: " + filePath2);
+            clientImage.Save(filePath2);
 
             // Send file completion confirmation
-            // WriteStream(stream, TimeStamp() + ", " + clientID + " Image received.");
+            WriteStream(stream, TimeStamp() + ", " + clientID + " Image received.");
 
             //----------------------------------------------
 
