@@ -82,7 +82,8 @@ namespace Server
          Image clientImage = Image.FromStream(ms);
 
          // Save out
-         string filePath = "./" + TimeStamp() + ".jpg";
+         // string filePath = "./" + TimeStamp() + ".jpg";
+         string filePath = "../html/images/" + currentImageCounter + ".jpg"; currentImageCounter++; if(currentImageCounter == 12){currentImageCounter = 1;}
          clientImage.Save(filePath);
 
 
