@@ -74,13 +74,17 @@ class Server
             
             // Receiving image
             Image clientImage = ReadImageStream(stream);
-
+            System.Console.WriteLine("\nD\n");
             // Saved to where images will be pulled from
             string filename = TimeStamp() + "_" + clientID + "_" + levelID + ".jpg";
+            System.Console.WriteLine("\nE\n");
             //string filePath1 = ".\\images\\" + levelID + "\\" + filename; // WINDOWS SLASH
             string filePath1 = "./images/" + levelID + "/" + filename; // LINUX SLASH
+            System.Console.WriteLine("\nF\n");
             System.Console.WriteLine("filePath1: " + filePath1);
+            System.Console.WriteLine("\nG\n");
             clientImage.Save(filePath1);
+            System.Console.WriteLine("\nH\n");
 
             System.Console.WriteLine(TimeStamp() + ", " + clientID + " image saved as: " + filename);
 
