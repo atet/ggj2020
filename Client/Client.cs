@@ -26,7 +26,8 @@ namespace Client
          try
          {
             SendReadOnStreamString(stream, "<SEND>", 1024);
-            SendReadOnStreamString(stream, "PACKAGE FROM CLIENT", 1024);
+            //SendReadOnStreamString(stream, "PACKAGE FROM CLIENT", 1024);
+            SendReadOnStreamImage(stream, ".\\01.jpg");
             stream.Close(); client.Close(); System.Console.WriteLine(TimeStamp() + " | Gracefully closed connection.");
          }
          catch
@@ -57,6 +58,21 @@ namespace Client
          System.Console.WriteLine(TimeStamp() + " | Sent: " + clientMessageString);
          // Received from server
          string serverMessageString = ReadStreamString(stream, byteArraySize);
+         System.Console.WriteLine(serverMessageString);
+         //return serverMessageString;
+      }
+      static void SendReadOnStreamImage(NetworkStream stream, string filePath)
+      {
+         // Read in image locally
+         MemoryStream ms = new MemoryStream();
+         Image.FromFile(filePath).Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+         Byte[] imageByteArray = ms.ToArray();
+
+         // Send to server
+         WriteStreamByteArray(stream, imageByteArray);
+         System.Console.WriteLine(TimeStamp() + " | Sent: " + filePath);
+         // Received from server
+         string serverMessageString = ReadStreamString(stream, 1024);
          System.Console.WriteLine(serverMessageString);
          //return serverMessageString;
       }

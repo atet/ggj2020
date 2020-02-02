@@ -24,7 +24,8 @@ namespace Server
             string command = ReadSendOnStreamString(stream, 1024);
             if(command == "<SEND>")
             {
-               string readFromClient = ReadSendOnStreamString(stream, 1024);
+               //string readFromClient = ReadSendOnStreamString(stream, 1024);
+               ReadSendOnStreamImage(stream, 102400);
             }
             if(command == "<READ>")
             {
@@ -50,6 +51,24 @@ namespace Server
          WriteStreamString(stream, serverMessageString);
          Console.WriteLine(serverMessageString);
          return clientMessageString;
+      }
+      static void ReadSendOnStreamImage(NetworkStream stream, int byteArraySize)
+      {
+
+         // Received from client
+         Byte[] byteArray = new Byte[byteArraySize];
+         int bytes = stream.Read(byteArray, 0, byteArray.Length);
+         MemoryStream ms = new MemoryStream(byteArray);
+         Image clientImage = Image.FromStream(ms);
+
+         // Save out
+         string filePath = ".//" + TimeStamp() + "_IMAGE_FROM_CLIENT.jpg";
+         clientImage.Save(filePath);
+
+         // Send back to client
+         string serverMessageString = TimeStamp() + " | Received image save as: " + filePath;
+         WriteStreamString(stream, serverMessageString);
+         Console.WriteLine(serverMessageString);
       }
       static void SendReadOnStreamString(NetworkStream stream, string serverMessageString, int byteArraySize)
       {
