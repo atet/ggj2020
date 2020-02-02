@@ -27,7 +27,7 @@ namespace Server
             if(command == "<SEND>")
             {
                //string readFromClient = ReadSendOnStreamString(stream, 1024);
-               ReadSendOnStreamImage(stream, 102400);
+               ReadSendOnStreamImage(stream, 1024000);
             }
             if(command == "<READ>")
             {
