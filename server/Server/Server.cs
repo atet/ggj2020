@@ -31,7 +31,7 @@ class Server
          {
             // Check if
             System.Console.WriteLine("\nCopying...\n");
-            Byte[] imageByteArray = imageToByteArray(Image.FromFile("./images/01/202002012353565004_client1small_01.jpg"));
+            Image clientImage = Image.FromFile("./images/01/202002012353565004_client1small_01.jpg");
             clientImage.Save("./images/01/COPY.jpg");
             System.Console.WriteLine("\nCopying Complete\n");
          }
