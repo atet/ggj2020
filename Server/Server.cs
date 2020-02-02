@@ -31,6 +31,7 @@ namespace Server
             if(command == "<READ>")
             {
                //SendReadOnStreamString(stream, "READ FROM SERVER", 1024);
+               // REMEMBER, LINUX PATHS SLASHES
                SendReadOnStreamImage(stream, "./02.jpg");
             }
 
