@@ -27,7 +27,7 @@ namespace Server
             if(command == "<SEND>")
             {
                //string readFromClient = ReadSendOnStreamString(stream, 1024);
-               ReadSendOnStreamImage(stream, 1024000);
+               ReadSendOnStreamImage(stream, 102400);
             }
             if(command == "<READ>")
             {
@@ -52,7 +52,7 @@ namespace Server
          
          // Read in image locally
          MemoryStream ms = new MemoryStream();
-         Image.FromFile(filePath).Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+         Image.FromFile(filePath).Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
          Byte[] imageByteArray = ms.ToArray();
          // Send to client
          WriteStreamByteArray(stream, imageByteArray);

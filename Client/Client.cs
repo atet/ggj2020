@@ -86,7 +86,7 @@ namespace Client
       {
          // Read in image locally
          MemoryStream ms = new MemoryStream();
-         Image.FromFile(filePath).Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+         Image.FromFile(filePath).Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
          Byte[] imageByteArray = ms.ToArray();
 
          // Send to server
