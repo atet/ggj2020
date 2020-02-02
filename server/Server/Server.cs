@@ -93,6 +93,7 @@ class Server
       }
       catch
       {
+         Thread.Sleep(5000);
          tCPClient.Close();
          System.Console.WriteLine(TimeStamp() + ", " + clientID + " forcibly closed connection!");
       }
