@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Net;
-using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Drawing;
 using System.IO;
@@ -12,13 +10,13 @@ class Client
       string filePathSend;
 
       filePathSend = ".\\imageSend\\01.jpg";
-      SendImageFromFile(filePathSend);
+      SendImageFromFile(filePathSend, "client1");
 
       filePathSend = ".\\imageSend\\02.jpg";
-      SendImageFromFile(filePathSend);
+      SendImageFromFile(filePathSend, "client1");
 
       filePathSend = ".\\imageSend\\03.jpg";
-      SendImageFromFile(filePathSend);
+      SendImageFromFile(filePathSend, "client1");
 
       // filePathSend = ".\\imageSend\\04.jpg";
       // SendImageFromFile(filePathSend);

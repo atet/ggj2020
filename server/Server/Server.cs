@@ -4,7 +4,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.IO;
 using System.Drawing;
-using System.Collections.Generic;
+
 class Server
 {
    const string serverIPAddress = "127.0.0.1"; const int serverPort = 11000;
