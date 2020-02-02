@@ -53,7 +53,9 @@ namespace Client
       }
       static void ReadSendOnStreamImage(NetworkStream stream, int byteArraySize)
       {
-
+         
+         WriteStreamString(stream, "<GO>");
+         
          // Received from server
          Byte[] byteArray = new Byte[byteArraySize];
          int bytes = stream.Read(byteArray, 0, byteArray.Length);
