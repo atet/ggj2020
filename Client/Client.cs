@@ -28,6 +28,7 @@ namespace Client
             SendReadOnStreamString(stream, "<SEND>", 1024);
             //SendReadOnStreamString(stream, "PACKAGE FROM CLIENT", 1024);
             SendReadOnStreamImage(stream, ".\\01.jpg");
+            // SendReadOnStreamImage(stream, ".\\images\\1.jpg");
             stream.Close(); client.Close(); System.Console.WriteLine(TimeStamp() + " | Gracefully closed connection.");
          }
          catch

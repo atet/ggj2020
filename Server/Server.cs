@@ -80,17 +80,22 @@ namespace Server
          MemoryStream ms = new MemoryStream(byteArray);
          Image clientImage = Image.FromStream(ms);
 
-         // Save out
-         string filePath = "./images/" + TimeStamp() + ".jpg";
-         clientImage.Save(filePath);
-         // Save out HTML
-         string filePathHTML = "../html/images/" + TimeStamp() + "1.jpg";
-         clientImage.Save(filePathHTML);
-
          // Send back to client
          string serverMessageString = TimeStamp() + " | Received image save as: " + filePath;
          WriteStreamString(stream, serverMessageString);
          Console.WriteLine(serverMessageString);
+
+
+         // Save out
+         string filePath = "./" + TimeStamp() + ".jpg";
+         clientImage.Save(filePath);
+
+
+         // string filePath = "./images/" + TimeStamp() + ".jpg";
+         // clientImage.Save(filePath);
+         // // Save out HTML
+         // string filePathHTML = "../html/images/" + TimeStamp() + "1.jpg";
+         // clientImage.Save(filePathHTML);
       }
       static void SendReadOnStreamString(NetworkStream stream, string serverMessageString, int byteArraySize)
       {
