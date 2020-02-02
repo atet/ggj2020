@@ -38,7 +38,7 @@ class Server
          if(command == "<SEND>")
          {
             // 1. Initial Connection to get clientID
-            //clientID = ReadSendOnStreamConnect(stream);
+            clientID = ReadSendOnStreamConnect(stream);
 
             // 2. Initial Connection to get levelID
             levelID = ReadSendOnStreamConnect3(stream);
@@ -47,8 +47,6 @@ class Server
             Image clientImage = ReadImageStream(stream);
             // Send file completion confirmation
             WriteStream(stream, TimeStamp() + ", " + clientID + " Image received.");
-
-            tCPClient.Close();
             
             System.Console.WriteLine("\nD\n");
             // Saved to where images will be pulled from

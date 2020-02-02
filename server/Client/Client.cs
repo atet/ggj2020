@@ -2,6 +2,7 @@
 using System.Net.Sockets;
 using System.Drawing;
 using System.IO;
+using System.Threading;
 
 class Client
 { 
@@ -13,11 +14,11 @@ class Client
       // RequestImageSaveToFile(dirRead, "01", "165.227.54.194");
       // // RequestImageSaveToFile(dirRead, "01", "127.0.0.1");
 
-      // // SEND DOES NOT WORK
-      // string filePathSend;
-      // filePathSend = ".\\imageSend\\01.jpg";
-      // SendImageFromFile(filePathSend, "client1", "165.227.54.194");
-      // // SendImageFromFile(filePathSend, "client1", "127.0.0.1");
+      // SEND DOES NOT WORK
+      string filePathSend;
+      filePathSend = ".\\imageSend\\01.jpg";
+      SendImageFromFile(filePathSend, "client1", "165.227.54.194");
+      // SendImageFromFile(filePathSend, "client1", "127.0.0.1");
 
       // // COPY TEST
       // TcpClient client = new TcpClient("165.227.54.194", 11000);
@@ -86,7 +87,7 @@ class Client
       SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes("<SEND>"));
 
       // 3. Send clientID
-      //SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes(clientID));
+      SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes(clientID));
 
       // Send levelID
       SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes(levelID));
@@ -94,11 +95,11 @@ class Client
       // Body of communication, Wait to confirm receipt
       SendReadOnStream(stream, imageToByteArray(Image.FromFile(filePathSend)));
 
-      
+      Thread.Sleep(5000);
       // Close stream communication
       stream.Close();
       client.Close();
-
+      
       System.Console.WriteLine("F");
    }
    // public static void SendImage(Image imageSend, string clientID, string levelID, string serverIPAddress = "127.0.0.1", int serverPort = 11000)
