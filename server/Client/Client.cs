@@ -5,7 +5,7 @@ using System.IO;
 
 class Client
 { 
-   const int maxByteArraySize = 102400;
+   const int maxByteArraySize = 51200;
    static void Main(string[] args)
    {
       string dirRead = ".\\imageRead\\";

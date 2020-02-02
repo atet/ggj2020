@@ -7,7 +7,7 @@ using System.Drawing;
 
 class Server
 {
-   const int maxByteArraySize = 102400;
+   const int maxByteArraySize = 51200;
    const string serverIPAddress = "0.0.0.0"; const int serverPort = 11000;
    //const string saveDir1 = ".\\images\\"; const string saveDir2 = "..\\..\\html\\images\\"; // WINDOWS SLASH
 
