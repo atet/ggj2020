@@ -8,7 +8,8 @@ using System.Drawing;
 class Server
 {
    const string serverIPAddress = "127.0.0.1"; const int serverPort = 11000;
-   const string saveDir = ".\\images\\";
+   // const string saveDir = ".\\images\\";
+   const string saveDir = "..\\..\\html\\images\\";
 
    Random random = new Random();
 
@@ -74,7 +75,8 @@ class Server
             // Receiving image
             Image clientImage = ReadImageStream(stream);
             string filename = TimeStamp() + "_" + clientID + "_" + levelID + ".jpg";
-            clientImage.Save(saveDir + levelID + "\\" + filename);
+            //clientImage.Save(saveDir + levelID + "\\" + filename);
+            clientImage.Save(saveDir + levelID + ".jpg");
             System.Console.WriteLine(TimeStamp() + ", " + clientID + " image saved as: " + filename);
 
             // Send file completion confirmation

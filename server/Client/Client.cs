@@ -12,43 +12,46 @@ class Client
       filePathSend = ".\\imageSend\\01.jpg";
       SendImageFromFile(filePathSend, "client1");
 
-      filePathSend = ".\\imageSend\\02.jpg";
-      SendImageFromFile(filePathSend, "client1");
+      // filePathSend = ".\\imageSend\\02.jpg";
+      // SendImageFromFile(filePathSend, "client1");
 
-      filePathSend = ".\\imageSend\\03.jpg";
-      SendImageFromFile(filePathSend, "client1");
+      // filePathSend = ".\\imageSend\\03.jpg";
+      // SendImageFromFile(filePathSend, "client1");
 
       // filePathSend = ".\\imageSend\\04.jpg";
-      // SendImageFromFile(filePathSend);
+      // SendImageFromFile(filePathSend, "client1");
 
       // filePathSend = ".\\imageSend\\05.jpg";
-      // SendImageFromFile(filePathSend);
+      // SendImageFromFile(filePathSend, "client1");
 
       // filePathSend = ".\\imageSend\\06.jpg";
-      // SendImageFromFile(filePathSend);
+      // SendImageFromFile(filePathSend, "client1");
 
       // filePathSend = ".\\imageSend\\07.jpg";
-      // SendImageFromFile(filePathSend);
+      // SendImageFromFile(filePathSend, "client1");
 
       // filePathSend = ".\\imageSend\\08.jpg";
-      // SendImageFromFile(filePathSend);
+      // SendImageFromFile(filePathSend, "client1");
 
       // filePathSend = ".\\imageSend\\09.jpg";
-      // SendImageFromFile(filePathSend);
+      // SendImageFromFile(filePathSend, "client1");
 
       // filePathSend = ".\\imageSend\\10.jpg";
-      // SendImageFromFile(filePathSend);
+      // SendImageFromFile(filePathSend, "client1");
 
       // filePathSend = ".\\imageSend\\11.jpg";
-      // SendImageFromFile(filePathSend);
+      // SendImageFromFile(filePathSend, "client1");
 
-      string dirRead = ".\\imageRead\\";
-      RequestImageSaveToFile(dirRead, "01");
-      RequestImageSaveToFile(dirRead, "01");
-      RequestImageSaveToFile(dirRead, "02");
-      RequestImageSaveToFile(dirRead, "02");
-      RequestImageSaveToFile(dirRead, "03");
-      RequestImageSaveToFile(dirRead, "03");
+      // filePathSend = ".\\imageSend\\12.jpg";
+      // SendImageFromFile(filePathSend, "client1");
+
+      // string dirRead = ".\\imageRead\\";
+      // RequestImageSaveToFile(dirRead, "01");
+      // RequestImageSaveToFile(dirRead, "01");
+      // RequestImageSaveToFile(dirRead, "02");
+      // RequestImageSaveToFile(dirRead, "02");
+      // RequestImageSaveToFile(dirRead, "03");
+      // RequestImageSaveToFile(dirRead, "03");
    }
 
    public static void SendImageFromFile(string filePathSend, string clientID, string serverIPAddress = "127.0.0.1", int serverPort = 11000)
