@@ -92,7 +92,7 @@ class Server
             // Initial Connection to get levelID for request
             levelID = ReadSendOnStreamConnect2(stream);
 
-            string[] filepaths = Directory.GetFiles(saveDir + levelID);
+            string[] filepaths = Directory.GetFiles(".\\images\\" + levelID);
             int randIdx = random.Next(0, filepaths.Length);
             System.Console.WriteLine("randIdx = " + randIdx + ", length = " + filepaths.Length);
             string filepath = filepaths[randIdx];
