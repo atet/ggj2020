@@ -72,8 +72,16 @@ class Server
             string filepath = filepaths[randIdx];
 
             System.Console.WriteLine(filepath);
+            
+            // Read in image locally
+            Byte[] imageByteArray = imageToByteArray(Image.FromFile(filepath));
+            // Determine byte array size
+            int imageByteArraySize = imageByteArray.Length;
+            // Send byte array size info
+
+
             // Sending image
-            SendReadOnStream(stream, imageToByteArray(Image.FromFile(filepath)));
+            SendReadOnStream(stream, imageByteArray);
             WriteStream(stream, TimeStamp() + ", Image sent: " + filepath);
             tCPClient.Close();
          }
@@ -197,11 +205,8 @@ class Server
    }
    static Image ReadImageStream(NetworkStream stream, int byteArraySize = maxByteArraySize) // Image
    {
-      System.Console.WriteLine("\nA\n");
       Byte[] byteArray = new Byte[byteArraySize];
-      System.Console.WriteLine("\nB\n");
       int bytes = stream.Read(byteArray, 0, byteArray.Length);
-      System.Console.WriteLine("\nC\n");
       return byteArrayToImage(byteArray);
    }
    static public Image byteArrayToImage(byte[] byteArrayIn)
