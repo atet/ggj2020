@@ -82,8 +82,10 @@ class Client
       SendReadOnStream(stream, imageToByteArray(Image.FromFile(filePathSend)));
       
       // Close stream communication
-      stream.Close();
-      client.Close();
+      //stream.Close();
+      //client.Close();
+      Console.ReadLine();
+            System.Console.WriteLine("F");
    }
    public static void SendImage(Image imageSend, string clientID, string levelID, string serverIPAddress = "127.0.0.1", int serverPort = 11000)
    {
@@ -160,10 +162,15 @@ class Client
    }
    static void SendReadOnStream(NetworkStream stream, Byte[] clientMessageByteArray, int byteArraySize = 1024000)
    {
+      System.Console.WriteLine("A " + clientMessageByteArray.Length.ToString());
       stream.Write(clientMessageByteArray, 0, clientMessageByteArray.Length);
+            System.Console.WriteLine("B");
       Byte[] serverMessageByteArray = new Byte[byteArraySize];
+            System.Console.WriteLine("C");
       int serverMessageBytes = stream.Read(serverMessageByteArray, 0, serverMessageByteArray.Length);
+            System.Console.WriteLine("D " + serverMessageBytes.ToString());
       System.Console.WriteLine(System.Text.Encoding.ASCII.GetString(serverMessageByteArray, 0, serverMessageBytes));
+            System.Console.WriteLine("A");
    }
    static public Image byteArrayToImage(byte[] byteArrayIn)
    {

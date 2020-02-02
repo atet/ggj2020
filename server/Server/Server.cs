@@ -118,7 +118,7 @@ class Server
       }
       catch
       {
-         tCPClient.Close();
+         //tCPClient.Close();
          System.Console.WriteLine(TimeStamp() + ", " + clientID + " forcibly closed connection!");
       }
    }
@@ -181,7 +181,7 @@ class Server
       Byte[] byteArray = System.Text.Encoding.ASCII.GetBytes(message);
       stream.Write(byteArray, 0, byteArray.Length);
    }
-   static Image ReadImageStream(NetworkStream stream, int byteArraySize = 1024) // Image
+   static Image ReadImageStream(NetworkStream stream, int byteArraySize = 1024000) // Image
    {
       System.Console.WriteLine("\nA\n");
       Byte[] byteArray = new Byte[byteArraySize];
