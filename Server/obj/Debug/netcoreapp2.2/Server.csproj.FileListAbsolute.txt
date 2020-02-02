@@ -1,0 +1,11 @@
+D:\Users\Atet Kao\Nextcloud\ggj2020\Server\bin\Debug\netcoreapp2.2\Server.deps.json
+D:\Users\Atet Kao\Nextcloud\ggj2020\Server\bin\Debug\netcoreapp2.2\Server.runtimeconfig.json
+D:\Users\Atet Kao\Nextcloud\ggj2020\Server\bin\Debug\netcoreapp2.2\Server.runtimeconfig.dev.json
+D:\Users\Atet Kao\Nextcloud\ggj2020\Server\bin\Debug\netcoreapp2.2\Server.dll
+D:\Users\Atet Kao\Nextcloud\ggj2020\Server\bin\Debug\netcoreapp2.2\Server.pdb
+D:\Users\Atet Kao\Nextcloud\ggj2020\Server\obj\Debug\netcoreapp2.2\Server.csprojAssemblyReference.cache
+D:\Users\Atet Kao\Nextcloud\ggj2020\Server\obj\Debug\netcoreapp2.2\Server.csproj.CoreCompileInputs.cache
+D:\Users\Atet Kao\Nextcloud\ggj2020\Server\obj\Debug\netcoreapp2.2\Server.AssemblyInfoInputs.cache
+D:\Users\Atet Kao\Nextcloud\ggj2020\Server\obj\Debug\netcoreapp2.2\Server.AssemblyInfo.cs
+D:\Users\Atet Kao\Nextcloud\ggj2020\Server\obj\Debug\netcoreapp2.2\Server.dll
+D:\Users\Atet Kao\Nextcloud\ggj2020\Server\obj\Debug\netcoreapp2.2\Server.pdb
