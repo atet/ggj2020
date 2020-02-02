@@ -8,19 +8,21 @@ class Client
    const int maxByteArraySize = 51200;
    static void Main(string[] args)
    {
+      // // REQUEST WORKS
       // string dirRead = ".\\imageRead\\";
       // RequestImageSaveToFile(dirRead, "01", "165.227.54.194");
       // // RequestImageSaveToFile(dirRead, "01", "127.0.0.1");
 
+      // // SEND DOES NOT WORK
       // string filePathSend;
       // filePathSend = ".\\imageSend\\01.jpg";
       // SendImageFromFile(filePathSend, "client1", "165.227.54.194");
       // // SendImageFromFile(filePathSend, "client1", "127.0.0.1");
 
-
-      TcpClient client = new TcpClient("165.227.54.194", 11000);
-      NetworkStream stream = client.GetStream();
-      SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes("<COPY>"));
+      // // COPY TEST
+      // TcpClient client = new TcpClient("165.227.54.194", 11000);
+      // NetworkStream stream = client.GetStream();
+      // SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes("<COPY>"));
 
 
       // filePathSend = ".\\imageSend\\01.jpg";
@@ -84,7 +86,7 @@ class Client
       SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes("<SEND>"));
 
       // 3. Send clientID
-      SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes(clientID));
+      //SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes(clientID));
 
       // Send levelID
       SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes(levelID));

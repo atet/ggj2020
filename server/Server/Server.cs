@@ -27,18 +27,18 @@ class Server
       {
          // Get command
          string command = ReadSendOnStreamCommand(stream);
-         if(command == "<COPY>")
-         {
-            // Check if
-            System.Console.WriteLine("\nCopying...\n");
-            Image clientImage = Image.FromFile("./images/01/202002012353565004_client1small_01.jpg");
-            clientImage.Save("./images/01/COPY.jpg");
-            System.Console.WriteLine("\nCopying Complete\n");
-         }
+         // if(command == "<COPY>")
+         // {
+         //    // Check if
+         //    System.Console.WriteLine("\nCopying...\n");
+         //    Image clientImage = Image.FromFile("./images/01/202002012353565004_client1small_01.jpg");
+         //    clientImage.Save("./images/01/COPY.jpg");
+         //    System.Console.WriteLine("\nCopying Complete\n");
+         // }
          if(command == "<SEND>")
          {
             // 1. Initial Connection to get clientID
-            clientID = ReadSendOnStreamConnect(stream);
+            //clientID = ReadSendOnStreamConnect(stream);
 
             // 2. Initial Connection to get levelID
             levelID = ReadSendOnStreamConnect3(stream);
