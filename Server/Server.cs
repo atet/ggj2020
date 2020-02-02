@@ -31,7 +31,7 @@ namespace Server
             if(command == "<READ>")
             {
                //SendReadOnStreamString(stream, "READ FROM SERVER", 1024);
-               SendReadOnStreamImage(stream, "./*_IMAGE_FROM_CLIENT.jpg");
+               SendReadOnStreamImage(stream, "./02.jpg");
             }
 
             client.Close();
@@ -47,14 +47,15 @@ namespace Server
       {
          // Read <GO>
          System.Console.WriteLine(ReadStreamString(stream, 1024));
+         
          // Read in image locally
          MemoryStream ms = new MemoryStream();
          Image.FromFile(filePath).Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
          Byte[] imageByteArray = ms.ToArray();
-
          // Send to client
          WriteStreamByteArray(stream, imageByteArray);
          System.Console.WriteLine(TimeStamp() + " | Sent: " + filePath);
+         
          // Received from client
          string clientMessageString = ReadStreamString(stream, 1024);
          System.Console.WriteLine(clientMessageString);
