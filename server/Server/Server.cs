@@ -56,7 +56,7 @@ class Server
    public void ReceiveSendOnStream(Object obj)
    {
       TcpClient tCPClient = (TcpClient)obj;
-      TcpClient.Client.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.KeepAlive, true);
+      tCPClient.Client.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.KeepAlive, true);
       NetworkStream stream = tCPClient.GetStream();
 
       string clientID = null;
