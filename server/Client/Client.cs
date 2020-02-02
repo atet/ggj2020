@@ -64,12 +64,11 @@ class Client
       // levelID is the filename, e.g. 01, 02, 03,...
       string levelID = Path.GetFileNameWithoutExtension(filePathSend);
       //System.Console.WriteLine(levelID);
-      System.Console.WriteLine("A");
+
       // Connect to server and establish stream
       TcpClient client = new TcpClient(serverIPAddress, serverPort);
-      System.Console.WriteLine("B");
       NetworkStream stream = client.GetStream();
-      System.Console.WriteLine("C");
+
       // Send command
       SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes("<SEND>"));
 
@@ -79,9 +78,10 @@ class Client
       // Send levelID
       SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes(levelID));
 
+      System.Console.WriteLine("A");
       // Body of communication, Wait to confirm receipt
       SendReadOnStream(stream, imageToByteArray(Image.FromFile(filePathSend)));
-
+      System.Console.WriteLine("B");
       // Close stream communication
       stream.Close();
       client.Close();

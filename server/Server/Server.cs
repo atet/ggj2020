@@ -70,11 +70,13 @@ class Server
             clientID = ReadSendOnStreamConnect(stream);
 
             // Initial Connection to get clientID
-            levelID = ReadSendOnStreamConnect2(stream);
-
+            levelID = ReadSendOnStreamConnect3(stream);
+            
+            System.Console.WriteLine("A");
             // Receiving image
             Image clientImage = ReadImageStream(stream);
-            
+            System.Console.WriteLine("B");
+
             // Saved to where images will be pulled from
             string filename = TimeStamp() + "_" + clientID + "_" + levelID + ".jpg";
             clientImage.Save(".\\images\\" + levelID + "\\" + filename);
@@ -143,6 +145,17 @@ class Server
 
       // Send back to client
       string serverMessageString = TimeStamp() + ", Images from Level " + levelID + " requested.";
+      Console.WriteLine(serverMessageString);
+      WriteStream(stream, serverMessageString);
+      return levelID;
+   }
+   static string ReadSendOnStreamConnect3(NetworkStream stream)
+   {
+      // Received from client
+      string levelID = ReadStream(stream);
+
+      // Send back to client
+      string serverMessageString = TimeStamp() + ", Images from Level " + levelID + " being sent.";
       Console.WriteLine(serverMessageString);
       WriteStream(stream, serverMessageString);
       return levelID;
