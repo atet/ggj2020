@@ -13,6 +13,7 @@ namespace Server
       const string saveDir1 = ".\\images\\"; const string saveDir2 = "..\\html\\images\\"; // WINDOWS SLASH
       //const string saveDir1 = "./images/"; const string saveDir2 = "../html/images/"; // LINUX SLASH
       Random random = new Random();
+      static int currentImageCounter = 1;
 
       public void ReceiveSendOnStream(Object obj)
       {
@@ -81,24 +82,21 @@ namespace Server
          Image clientImage = Image.FromStream(ms);
 
          // Send back to client
-         string filePath = "./" + TimeStamp() + ".jpg";
-
-
+         // string filePath = "./" + TimeStamp() + ".jpg";
+         string filePath = "../html/images/" + currentImageCounter + ".jpg"; currentImageCounter++;
          string serverMessageString = TimeStamp() + " | Received image save as: " + filePath;
          WriteStreamString(stream, serverMessageString);
          Console.WriteLine(serverMessageString);
 
-
          // Save out
+         //clientImage.Save(filePath);
 
-         clientImage.Save(filePath);
-
-//   ../html/images/
+         //   ../html/images/
          // string filePath = "./images/" + TimeStamp() + ".jpg";
          // clientImage.Save(filePath);
          // // Save out HTML
-         string filePathHTML = "../html/images/1.jpg";
-         clientImage.Save(filePathHTML);
+
+         // clientImage.Save(filePathHTML);
       }
       static void SendReadOnStreamString(NetworkStream stream, string serverMessageString, int byteArraySize)
       {
