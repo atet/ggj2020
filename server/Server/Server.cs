@@ -228,7 +228,11 @@ class Server
    }
    static void SendReadOnStream(NetworkStream stream, Byte[] clientMessageByteArray, int byteArraySize = 1024000)
    {
-      stream.Write(clientMessageByteArray, 0, byteArraySize); //clientMessageByteArray.Length);
+      // Send byte array
+      stream.Write(clientMessageByteArray, 0, clientMessageByteArray.Length);
+      stream.Write(clientMessageByteArray, 0, byteArraySize);
+
+      // Get response
       Byte[] serverMessageByteArray = new Byte[byteArraySize];
       int serverMessageBytes = stream.Read(serverMessageByteArray, 0, serverMessageByteArray.Length);
       System.Console.WriteLine(System.Text.Encoding.ASCII.GetString(serverMessageByteArray, 0, serverMessageBytes));
