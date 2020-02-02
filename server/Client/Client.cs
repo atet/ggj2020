@@ -192,9 +192,6 @@ class Client
    {
       Byte[] byteArray = new Byte[byteArraySize];
       int bytes = stream.Read(byteArray, 0, byteArray.Length);
-
-      Console.ReadLine();
-
       return byteArrayToImage(byteArray);
    }
 }

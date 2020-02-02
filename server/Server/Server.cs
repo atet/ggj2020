@@ -233,8 +233,6 @@ class Server
       stream.Write(clientMessageByteArray, 0, clientMessageByteArray.Length);
       //stream.Write(clientMessageByteArray, 0, byteArraySize);
 
-      Console.ReadLine();
-      
       // Get response
       Byte[] serverMessageByteArray = new Byte[byteArraySize];
       int serverMessageBytes = stream.Read(serverMessageByteArray, 0, serverMessageByteArray.Length);
