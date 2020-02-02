@@ -8,9 +8,9 @@ using System.Drawing;
 class Server
 {
    const string serverIPAddress = "0.0.0.0"; const int serverPort = 11000;
-   const string saveDir1 = ".\\images\\"; const string saveDir2 = "..\\..\\html\\images\\"; // WINDOWS SLASH
+   //const string saveDir1 = ".\\images\\"; const string saveDir2 = "..\\..\\html\\images\\"; // WINDOWS SLASH
 
-   //const string saveDir1 = "./images/"; const string saveDir2 = "../../html/images/"; // LINUX SLASH
+   const string saveDir1 = "./images/"; const string saveDir2 = "../../html/images/"; // LINUX SLASH
 
    Random random = new Random();
 
