@@ -133,7 +133,7 @@ class Client
       SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes(levelID));
 
       // Receiving image
-      Image clientImage = ReadImageStream(stream);
+      Image clientImage = ReadImageStream(stream, maxByteArraySize - 8);
       string filename = levelID + ".jpg";
       clientImage.Save(dirRead + filename);
 
