@@ -4,63 +4,46 @@ using System.Drawing;
 using System.IO;
 
 class Client
-{
-   const string serverIPAddress1 = "127.0.0.1"; const int serverPort1 = 11000;
-   const string filePath = ".\\images\\test.jpg";
-
+{ 
    static void Main(string[] args)
    {
-      Client client1 = new Client(serverIPAddress1, serverPort1, "Client1");
+      string filePath = ".\\images\\test.jpg";
+      SendImage(filePath);
    }
 
-   public void SendImage()
+   static public void SendImage(string filePath, string serverIPAddress = "127.0.0.1", int serverPort = 11000, string clientID = "127001000a959d6816")
    {
+      // NO SPECIAL CHARACTERS FOR CLIENTID!!!
 
-   }
-   public void RequestImages()
-   {
-
-   }
-
-
-   public Client(string serverIPAddress, int serverPort, string clientID)
-   {
       // Connect to server and establish stream
       TcpClient client = new TcpClient(serverIPAddress, serverPort);
       NetworkStream stream = client.GetStream();
 
       // Confirm stream communication
-      SendReceiveOnStream(stream, System.Text.Encoding.ASCII.GetBytes(clientID));
+      SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes(clientID));
 
-      // Body of communication
-      SendReceiveOnStream(stream, imageToByteArray(Image.FromFile(filePath)));
-
-      // Wait to confirm receipt
-      string receipt = ReadStream(stream);
-      if(receipt == "<EOF>")
-      {
-                        stream.Close();
-      client.Close();
-         System.Console.WriteLine(receipt);
-
-      }
-
-
+      // Body of communication, Wait to confirm receipt
+      SendReadOnStream(stream, imageToByteArray(Image.FromFile(filePath)));
 
       // Close stream communication
-      System.Console.WriteLine("D1");
       stream.Close();
       client.Close();
-      System.Console.WriteLine("Done");
    }
-   static void SendReceiveOnStream(NetworkStream stream, Byte[] clientMessageByteArray, int byteArraySize = 1024000)
+   public void RequestImages()
+   {
+   }
+   static void SendReadOnStream(NetworkStream stream, Byte[] clientMessageByteArray, int byteArraySize = 1024000)
    {
       stream.Write(clientMessageByteArray, 0, clientMessageByteArray.Length);
       Byte[] serverMessageByteArray = new Byte[byteArraySize];
       int serverMessageBytes = stream.Read(serverMessageByteArray, 0, serverMessageByteArray.Length);
       System.Console.WriteLine(System.Text.Encoding.ASCII.GetString(serverMessageByteArray, 0, serverMessageBytes));
    }
-   static string ReadStream(NetworkStream stream, int byteArraySize = 1024) // Text
+   static void SendOnStream(NetworkStream stream, Byte[] clientMessageByteArray, int byteArraySize = 1024000)
+   {
+      stream.Write(clientMessageByteArray, 0, clientMessageByteArray.Length);
+   }
+   static string ReadOnStream(NetworkStream stream, int byteArraySize = 1024) // Text
    {
       Byte[] byteArray = new Byte[byteArraySize];
       int bytes = stream.Read(byteArray, 0, byteArray.Length);
@@ -72,10 +55,13 @@ class Client
       Image returnImage = Image.FromStream(ms);
       return returnImage;
    }
-   public byte[] imageToByteArray(System.Drawing.Image imageIn)
+   static public byte[] imageToByteArray(System.Drawing.Image imageIn)
    {
       MemoryStream ms = new MemoryStream();
       imageIn.Save(ms,System.Drawing.Imaging.ImageFormat.Gif);
       return ms.ToArray();
+   }
+   public Client()
+   {
    }
 }

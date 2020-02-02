@@ -7,6 +7,7 @@ using System.Drawing;
 class Server
 {
    const string serverIPAddress1 = "127.0.0.1"; const int serverPort1 = 11000;
+   const string saveDir = ".\\images\\";
 
    static void Main(string[] args)
    {
@@ -57,30 +58,28 @@ class Server
       try
       {
          // Initial Connection to register client
-         clientID = ReceiveSendOnStreamConnect(stream);
+         clientID = ReadSendOnStreamConnect(stream);
 
          // Receiving image
          Image clientImage = ReadImageStream(stream);
          string filename = TimeStamp() + "_" + clientID + ".jpg";
-         clientImage.Save(".\\images\\" + filename);
+         clientImage.Save(saveDir + filename);
          System.Console.WriteLine(TimeStamp() + ", " + clientID + " image saved as: " + filename);
 
          // Send file completion confirmation
-         WriteStream(stream, "<EOF>");
-//TimeStamp() + ", " + clientID + " file received."
+         WriteStream(stream, TimeStamp() + ", " + clientID + " Image received.");
       }
       catch
       {
          tCPClient.Close();
-         System.Console.WriteLine(TimeStamp() + ", " + clientID + " forcibly closed connection");
+         System.Console.WriteLine(TimeStamp() + ", " + clientID + " forcibly closed connection!");
       }
-
    }
    public static string TimeStamp()
    {
       return DateTime.Now.ToString("yyyyMMddHHmmssffff");
    }
-   static string ReceiveSendOnStreamConnect(NetworkStream stream)
+   static string ReadSendOnStreamConnect(NetworkStream stream)
    {
       // Received from client
       string clientID = ReadStream(stream);
