@@ -83,7 +83,7 @@ namespace Server
          // Send back to client
          string filePath = "./" + TimeStamp() + ".jpg";
 
-         
+
          string serverMessageString = TimeStamp() + " | Received image save as: " + filePath;
          WriteStreamString(stream, serverMessageString);
          Console.WriteLine(serverMessageString);
@@ -93,12 +93,12 @@ namespace Server
 
          clientImage.Save(filePath);
 
-
+//   ../html/images/
          // string filePath = "./images/" + TimeStamp() + ".jpg";
          // clientImage.Save(filePath);
          // // Save out HTML
-         // string filePathHTML = "../html/images/" + TimeStamp() + "1.jpg";
-         // clientImage.Save(filePathHTML);
+         string filePathHTML = "../html/images/1.jpg";
+         clientImage.Save(filePathHTML);
       }
       static void SendReadOnStreamString(NetworkStream stream, string serverMessageString, int byteArraySize)
       {
