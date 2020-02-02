@@ -179,8 +179,11 @@ class Server
    }
    static Image ReadImageStream(NetworkStream stream, int byteArraySize = 1024000) // Image
    {
+      System.Console.WriteLine("\nA\n");
       Byte[] byteArray = new Byte[byteArraySize];
+      System.Console.WriteLine("\nB\n");
       int bytes = stream.Read(byteArray, 0, byteArray.Length);
+      System.Console.WriteLine("\nC\n");
       return byteArrayToImage(byteArray);
    }
    static public Image byteArrayToImage(byte[] byteArrayIn)
