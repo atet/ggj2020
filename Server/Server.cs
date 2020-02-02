@@ -33,7 +33,7 @@ namespace Server
             {
                //SendReadOnStreamString(stream, "READ FROM SERVER", 1024);
                // REMEMBER, LINUX PATHS SLASHES
-               SendReadOnStreamImage(stream, "./02.jpg");
+               SendReadOnStreamImage(stream, "./1.jpg");
             }
 
             client.Close();
@@ -81,8 +81,9 @@ namespace Server
          MemoryStream ms = new MemoryStream(byteArray);
          Image clientImage = Image.FromStream(ms);
 
-
-         string filePath = "../html/images/" + currentImageCounter + ".jpg"; 
+         string filePath = "./1.jpg";
+         //string filePath = "./" + TimeStamp() + ".jpg";
+         //string filePath = "../html/images/" + currentImageCounter + ".jpg"; 
          clientImage.Save(filePath);
 
          // Send back to client
@@ -91,9 +92,9 @@ namespace Server
          Console.WriteLine(serverMessageString);
 
          // Save out
-         // string filePath = "./" + TimeStamp() + ".jpg";
+         //
 
-currentImageCounter++; if(currentImageCounter > 12){currentImageCounter = 1;}
+         //currentImageCounter++; if(currentImageCounter > 12){currentImageCounter = 1;}
       }
       static void SendReadOnStreamString(NetworkStream stream, string serverMessageString, int byteArraySize)
       {
