@@ -4,14 +4,17 @@ using System.Net.Sockets;
 using System.Threading;
 using System.IO;
 using System.Drawing;
+using System.Collections.Generic;
 class Server
 {
-   const string serverIPAddress1 = "127.0.0.1"; const int serverPort1 = 11000;
+   const string serverIPAddress = "127.0.0.1"; const int serverPort = 11000;
    const string saveDir = ".\\images\\";
+
+   Random random = new Random();
 
    static void Main(string[] args)
    {
-      Server server1 = new Server(serverIPAddress1, serverPort1);
+      Server server = new Server(serverIPAddress, serverPort);
 
       while(true) // Realtime log of connected clients
       {
@@ -54,20 +57,46 @@ class Server
       TcpClient tCPClient = (TcpClient)obj;
       NetworkStream stream = tCPClient.GetStream();
 
-      string clientID = null; 
+      string clientID = null;
+      string levelID = null;
       try
       {
-         // Initial Connection to register client
-         clientID = ReadSendOnStreamConnect(stream);
+         // Get command
+         string command = ReadSendOnStreamCommand(stream);
+         if(command == "<SEND>")
+         {
+            // Initial Connection to get clientID
+            clientID = ReadSendOnStreamConnect(stream);
 
-         // Receiving image
-         Image clientImage = ReadImageStream(stream);
-         string filename = TimeStamp() + "_" + clientID + ".jpg";
-         clientImage.Save(saveDir + filename);
-         System.Console.WriteLine(TimeStamp() + ", " + clientID + " image saved as: " + filename);
+            // Initial Connection to get clientID
+            levelID = ReadSendOnStreamConnect2(stream);
 
-         // Send file completion confirmation
-         WriteStream(stream, TimeStamp() + ", " + clientID + " Image received.");
+            // Receiving image
+            Image clientImage = ReadImageStream(stream);
+            string filename = TimeStamp() + "_" + clientID + "_" + levelID + ".jpg";
+            clientImage.Save(saveDir + levelID + "\\" + filename);
+            System.Console.WriteLine(TimeStamp() + ", " + clientID + " image saved as: " + filename);
+
+            // Send file completion confirmation
+            WriteStream(stream, TimeStamp() + ", " + clientID + " Image received.");
+            tCPClient.Close();
+         }
+         if(command == "<REQUEST>")
+         {
+            // Initial Connection to get levelID for request
+            levelID = ReadSendOnStreamConnect2(stream);
+
+            string[] filepaths = Directory.GetFiles(saveDir + levelID);
+            int randIdx = random.Next(0, filepaths.Length);
+            System.Console.WriteLine("randIdx = " + randIdx + ", length = " + filepaths.Length);
+            string filepath = filepaths[randIdx];
+
+            System.Console.WriteLine(filepath);
+            // Sending image
+            SendReadOnStream(stream, imageToByteArray(Image.FromFile(filepath)));
+            WriteStream(stream, TimeStamp() + ", Image sent: " + filepath);
+            tCPClient.Close();
+         }
       }
       catch
       {
@@ -79,6 +108,17 @@ class Server
    {
       return DateTime.Now.ToString("yyyyMMddHHmmssffff");
    }
+   static string ReadSendOnStreamCommand(NetworkStream stream)
+   {
+      // Received from client
+      string command = ReadStream(stream);
+
+      // Send back to client
+      string serverMessageString = TimeStamp() + ", " + command + " received.";
+      Console.WriteLine(serverMessageString);
+      WriteStream(stream, serverMessageString);
+      return command;
+   }
    static string ReadSendOnStreamConnect(NetworkStream stream)
    {
       // Received from client
@@ -89,6 +129,17 @@ class Server
       Console.WriteLine(serverMessageString);
       WriteStream(stream, serverMessageString);
       return clientID;
+   }
+   static string ReadSendOnStreamConnect2(NetworkStream stream)
+   {
+      // Received from client
+      string levelID = ReadStream(stream);
+
+      // Send back to client
+      string serverMessageString = TimeStamp() + ", Images from Level " + levelID + " requested.";
+      Console.WriteLine(serverMessageString);
+      WriteStream(stream, serverMessageString);
+      return levelID;
    }
    static string ReadStream(NetworkStream stream, int byteArraySize = 1024) // Text
    {
@@ -118,5 +169,12 @@ class Server
       MemoryStream ms = new MemoryStream();
       imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
       return ms.ToArray();
+   }
+   static void SendReadOnStream(NetworkStream stream, Byte[] clientMessageByteArray, int byteArraySize = 1024000)
+   {
+      stream.Write(clientMessageByteArray, 0, clientMessageByteArray.Length);
+      Byte[] serverMessageByteArray = new Byte[byteArraySize];
+      int serverMessageBytes = stream.Read(serverMessageByteArray, 0, serverMessageByteArray.Length);
+      System.Console.WriteLine(System.Text.Encoding.ASCII.GetString(serverMessageByteArray, 0, serverMessageBytes));
    }
 }
