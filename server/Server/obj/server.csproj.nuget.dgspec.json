@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Users\\Atet Kao\\Nextcloud\\WORK\\GGJ 2020\\ggj2020\\server\\Server\\server.csproj": {}
+    "/mnt/d/Users/Atet Kao/Nextcloud/WORK/GGJ 2020/ggj2020/server/Server/server.csproj": {}
   },
   "projects": {
-    "D:\\Users\\Atet Kao\\Nextcloud\\WORK\\GGJ 2020\\ggj2020\\server\\Server\\server.csproj": {
+    "/mnt/d/Users/Atet Kao/Nextcloud/WORK/GGJ 2020/ggj2020/server/Server/server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Users\\Atet Kao\\Nextcloud\\WORK\\GGJ 2020\\ggj2020\\server\\Server\\server.csproj",
+        "projectUniqueName": "/mnt/d/Users/Atet Kao/Nextcloud/WORK/GGJ 2020/ggj2020/server/Server/server.csproj",
         "projectName": "server",
-        "projectPath": "D:\\Users\\Atet Kao\\Nextcloud\\WORK\\GGJ 2020\\ggj2020\\server\\Server\\server.csproj",
-        "packagesPath": "C:\\Users\\Atet Kao\\.nuget\\packages\\",
-        "outputPath": "D:\\Users\\Atet Kao\\Nextcloud\\WORK\\GGJ 2020\\ggj2020\\server\\Server\\obj\\",
+        "projectPath": "/mnt/d/Users/Atet Kao/Nextcloud/WORK/GGJ 2020/ggj2020/server/Server/server.csproj",
+        "packagesPath": "/home/mba/.nuget/packages/",
+        "outputPath": "/mnt/d/Users/Atet Kao/Nextcloud/WORK/GGJ 2020/ggj2020/server/Server/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "/usr/share/dotnet/sdk/NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Atet Kao\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/mba/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.2"
