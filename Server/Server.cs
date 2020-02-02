@@ -83,6 +83,9 @@ namespace Server
          // Save out
          string filePath = "./images/" + TimeStamp() + ".jpg";
          clientImage.Save(filePath);
+         // Save out HTML
+         string filePathHTML = "../html/images/" + TimeStamp() + "1.jpg";
+         clientImage.Save(filePathHTML);
 
          // Send back to client
          string serverMessageString = TimeStamp() + " | Received image save as: " + filePath;
