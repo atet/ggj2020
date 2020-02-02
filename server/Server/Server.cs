@@ -42,7 +42,6 @@ class Server
          while(true)
          {
             TcpClient tCPClient = serverTCPListener.AcceptTcpClient();
-            tCPClient.Client.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.KeepAlive, true);
             Thread thread = new Thread(
                new ParameterizedThreadStart(ReceiveSendOnStream)
             );

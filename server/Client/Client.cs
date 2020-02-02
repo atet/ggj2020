@@ -94,6 +94,7 @@ class Client
 
       // Connect to server and establish stream
       TcpClient client = new TcpClient(serverIPAddress, serverPort);
+      //client.Client.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.KeepAlive, true);
       NetworkStream stream = client.GetStream();
 
       // Send command
