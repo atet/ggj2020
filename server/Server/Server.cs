@@ -77,13 +77,18 @@ class Server
 
             // Saved to where images will be pulled from
             string filename = TimeStamp() + "_" + clientID + "_" + levelID + ".jpg";
-            //clientImage.Save(".\\images\\" + levelID + "\\" + filename); // WINDOWS SLASH
-            clientImage.Save("./images/" + levelID + "/" + filename); // LINUX SLASH
+            //string filePath1 = ".\\images\\" + levelID + "\\" + filename; // WINDOWS SLASH
+            string filePath1 = "./images/" + levelID + "/" + filename; // LINUX SLASH
+            System.Console.WriteLine("filePath1: " + filePath1);
+            clientImage.Save(filePath1);
+
             System.Console.WriteLine(TimeStamp() + ", " + clientID + " image saved as: " + filename);
 
             // Saved to html
-            //clientImage.Save("..\\..\\html\\images\\" + levelID + ".jpg"); // WINDOWS SLASH
-            clientImage.Save("../../html/images/" + levelID + ".jpg"); // LINUX SLASH
+            //string filePath2 = "..\\..\\html\\images\\" + levelID + ".jpg"; // WINDOWS SLASH
+            string filePath2 = "../../html/images/" + levelID + ".jpg"; // LINUX SLASH
+            System.Console.WriteLine("filePath2: " + filePath2);
+            clientImage.Save(filePath2);
 
             // Send file completion confirmation
             WriteStream(stream, TimeStamp() + ", " + clientID + " Image received.");
