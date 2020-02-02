@@ -9,7 +9,7 @@ class Server
 {
    const string serverIPAddress = "127.0.0.1"; const int serverPort = 11000;
    // const string saveDir = ".\\images\\";
-   const string saveDir = "..\\..\\html\\images\\";
+   //const string saveDir = "..\\..\\html\\images\\";
 
    Random random = new Random();
 
@@ -74,10 +74,14 @@ class Server
 
             // Receiving image
             Image clientImage = ReadImageStream(stream);
+            
+            // Saved to where images will be pulled from
             string filename = TimeStamp() + "_" + clientID + "_" + levelID + ".jpg";
-            //clientImage.Save(saveDir + levelID + "\\" + filename);
-            clientImage.Save(saveDir + levelID + ".jpg");
+            clientImage.Save(".\\images\\" + levelID + "\\" + filename);
             System.Console.WriteLine(TimeStamp() + ", " + clientID + " image saved as: " + filename);
+
+            // Saved to html
+            clientImage.Save("..\\..\\html\\images\\" + levelID + ".jpg");
 
             // Send file completion confirmation
             WriteStream(stream, TimeStamp() + ", " + clientID + " Image received.");
