@@ -10,7 +10,10 @@ class Client
       string filePathSend;
 
       filePathSend = ".\\imageSend\\01.jpg";
-      SendImageFromFile(filePathSend, "client1");
+      SendImageFromFile(filePathSend, "client1", "165.227.54.194");
+
+      // filePathSend = ".\\imageSend\\01.jpg";
+      // SendImageFromFile(filePathSend, "client1");
 
       // filePathSend = ".\\imageSend\\02.jpg";
       // SendImageFromFile(filePathSend, "client1");
@@ -60,12 +63,13 @@ class Client
 
       // levelID is the filename, e.g. 01, 02, 03,...
       string levelID = Path.GetFileNameWithoutExtension(filePathSend);
-      System.Console.WriteLine(levelID);
-
+      //System.Console.WriteLine(levelID);
+      System.Console.WriteLine("A");
       // Connect to server and establish stream
       TcpClient client = new TcpClient(serverIPAddress, serverPort);
+      System.Console.WriteLine("B");
       NetworkStream stream = client.GetStream();
-
+      System.Console.WriteLine("C");
       // Send command
       SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes("<SEND>"));
 

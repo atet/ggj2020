@@ -7,7 +7,7 @@ using System.Drawing;
 
 class Server
 {
-   const string serverIPAddress = "127.0.0.1"; const int serverPort = 11000;
+   const string serverIPAddress = "0.0.0.0"; const int serverPort = 11000;
    // const string saveDir = ".\\images\\";
    //const string saveDir = "..\\..\\html\\images\\";
 
