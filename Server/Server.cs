@@ -53,6 +53,8 @@ namespace Server
       }
       static void SendReadOnStreamString(NetworkStream stream, string serverMessageString, int byteArraySize)
       {
+         // Start notice from client
+         string clientStartString = ReadStreamString(stream, byteArraySize);
          // Send to client
          WriteStreamString(stream, serverMessageString);
          System.Console.WriteLine(TimeStamp() + " | Sent: " + serverMessageString);

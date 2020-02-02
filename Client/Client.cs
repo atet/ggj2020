@@ -62,6 +62,8 @@ namespace Client
       }
       static void ReadSendOnStreamString(NetworkStream stream, int byteArraySize)
       {
+         // Send start notice
+         WriteStreamString(stream, "<START>");
          // Received from server
          string serverMessageString = ReadStreamString(stream, byteArraySize);
          // Send back to server
