@@ -43,8 +43,8 @@ namespace Server
 
       static string ReadSendOnStreamString(NetworkStream stream, int byteArraySize)
       {
-         // // Received from client
-         // string clientMessageString = ReadStreamString(stream, byteArraySize);
+         // Received from client
+         string clientMessageString = ReadStreamString(stream, byteArraySize);
          // Send back to client
          string serverMessageString = TimeStamp() + " | Received: " + clientMessageString;
          WriteStreamString(stream, serverMessageString);
@@ -53,8 +53,8 @@ namespace Server
       }
       static void SendReadOnStreamString(NetworkStream stream, string serverMessageString, int byteArraySize)
       {
-         // Start notice from client
-         System.Console.WriteLine(ReadStreamString(stream, byteArraySize));
+         // // Start notice from client
+         // System.Console.WriteLine(ReadStreamString(stream, byteArraySize));
          // Send to client
          WriteStreamString(stream, serverMessageString);
          System.Console.WriteLine(TimeStamp() + " | Sent: " + serverMessageString);
