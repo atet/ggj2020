@@ -46,7 +46,7 @@ namespace Server
       static void SendReadOnStreamImage(NetworkStream stream, string filePath)
       {
          // Read <GO>
-         System.Console.WriteLine(ReadStreamString(stream, 1024));
+         //System.Console.WriteLine(ReadStreamString(stream, 1024));
          
          // Read in image locally
          MemoryStream ms = new MemoryStream();

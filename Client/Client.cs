@@ -54,7 +54,7 @@ namespace Client
       static void ReadSendOnStreamImage(NetworkStream stream, int byteArraySize)
       {
          
-         WriteStreamString(stream, "<GO>");
+         //WriteStreamString(stream, "<GO>");
          
          // Received from server
          Byte[] byteArray = new Byte[byteArraySize];
