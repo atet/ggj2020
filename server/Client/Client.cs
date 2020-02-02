@@ -7,13 +7,13 @@ class Client
 { 
    static void Main(string[] args)
    {
-      string dirRead = ".\\imageRead\\";
+      // string dirRead = ".\\imageRead\\";
       // RequestImageSaveToFile(dirRead, "01", "165.227.54.194");
-      RequestImageSaveToFile(dirRead, "01", "127.0.0.1");
+      // // RequestImageSaveToFile(dirRead, "01", "127.0.0.1");
 
-      // string filePathSend;
-      // filePathSend = ".\\imageSend\\01.jpg";
-      // // SendImageFromFile(filePathSend, "client1", "165.227.54.194");
+      string filePathSend;
+      filePathSend = ".\\imageSend\\01.jpg";
+      SendImageFromFile(filePathSend, "client1", "165.227.54.194");
       // SendImageFromFile(filePathSend, "client1", "127.0.0.1");
 
       // filePathSend = ".\\imageSend\\01.jpg";

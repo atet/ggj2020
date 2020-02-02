@@ -7,6 +7,7 @@ using System.Drawing;
 
 class Server
 {
+   const int maxByteArraySize = 102400;
    const string serverIPAddress = "0.0.0.0"; const int serverPort = 11000;
    //const string saveDir1 = ".\\images\\"; const string saveDir2 = "..\\..\\html\\images\\"; // WINDOWS SLASH
 
@@ -183,7 +184,7 @@ class Server
       WriteStream(stream, serverMessageString);
       return levelID;
    }
-   static string ReadStream(NetworkStream stream, int byteArraySize = 1024) // Text
+   static string ReadStream(NetworkStream stream, int byteArraySize = maxByteArraySize) // Text
    {
       Byte[] byteArray = new Byte[byteArraySize];
       int bytes = stream.Read(byteArray, 0, byteArray.Length);
@@ -194,7 +195,7 @@ class Server
       Byte[] byteArray = System.Text.Encoding.ASCII.GetBytes(message);
       stream.Write(byteArray, 0, byteArray.Length);
    }
-   static Image ReadImageStream(NetworkStream stream, int byteArraySize = 1024000) // Image
+   static Image ReadImageStream(NetworkStream stream, int byteArraySize = maxByteArraySize) // Image
    {
       System.Console.WriteLine("\nA\n");
       Byte[] byteArray = new Byte[byteArraySize];
@@ -215,7 +216,7 @@ class Server
       imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
       return ms.ToArray();
    }
-   static void SendReadOnStream(NetworkStream stream, Byte[] clientMessageByteArray, int byteArraySize = 1024000)
+   static void SendReadOnStream(NetworkStream stream, Byte[] clientMessageByteArray, int byteArraySize = maxByteArraySize)
    {
       // Send byte array
       System.Console.WriteLine("clientMessageByteArray.Length = " + clientMessageByteArray.Length.ToString());
