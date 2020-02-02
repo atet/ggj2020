@@ -13,6 +13,86 @@ class Server
 
    Random random = new Random();
 
+
+   public void ReceiveSendOnStream(Object obj)
+   {
+      TcpClient tCPClient = (TcpClient)obj;
+      NetworkStream stream = tCPClient.GetStream();
+
+      string clientID = null;
+      string levelID = null;
+      try
+      {
+         // Get command
+         string command = ReadSendOnStreamCommand(stream);
+         if(command == "<SEND>")
+         {
+            // Initial Connection to get clientID
+            clientID = ReadSendOnStreamConnect(stream);
+
+            // Initial Connection to get clientID
+            levelID = ReadSendOnStreamConnect3(stream);
+            
+            // Receiving image
+            // Image clientImage = ReadImageStream(stream);
+            // System.Console.WriteLine("\nD\n");
+            // // Saved to where images will be pulled from
+            // string filename = TimeStamp() + "_" + clientID + "_" + levelID + ".jpg";
+            // System.Console.WriteLine("\nE\n");
+            // //string filePath1 = ".\\images\\" + levelID + "\\" + filename; // WINDOWS SLASH
+            // string filePath1 = "./images/" + levelID + "/" + filename; // LINUX SLASH
+            // System.Console.WriteLine("\nF\n");
+            // System.Console.WriteLine("filePath1: " + filePath1);
+            // System.Console.WriteLine("\nG\n");
+            // clientImage.Save(filePath1);
+            // System.Console.WriteLine("\nH\n");
+            // System.Console.WriteLine(TimeStamp() + ", " + clientID + " image saved as: " + filename);
+            // Saved to html dirs
+            //string filePath2 = "..\\..\\html\\images\\" + levelID + ".jpg"; // WINDOWS SLASH
+            // string filePath2 = "../../html/images/" + levelID + ".jpg"; // LINUX SLASH
+            // System.Console.WriteLine("filePath2: " + filePath2);
+            // clientImage.Save(filePath2);
+
+            // Send file completion confirmation
+            // WriteStream(stream, TimeStamp() + ", " + clientID + " Image received.");
+            tCPClient.Close();
+         }
+         if(command == "<REQUEST>")
+         {
+            // Initial Connection to get levelID for request
+            levelID = ReadSendOnStreamConnect2(stream);
+
+            //string[] filepaths = Directory.GetFiles(".\\images\\" + levelID); // WINDOWS SLASH
+            string[] filepaths = Directory.GetFiles("./images/" + levelID); // LINUX SLASH
+            int randIdx = random.Next(0, filepaths.Length);
+            System.Console.WriteLine("randIdx = " + randIdx + ", length = " + filepaths.Length);
+            string filepath = filepaths[randIdx];
+
+            System.Console.WriteLine(filepath);
+            // Sending image
+            SendReadOnStream(stream, imageToByteArray(Image.FromFile(filepath)));
+            WriteStream(stream, TimeStamp() + ", Image sent: " + filepath);
+            tCPClient.Close();
+         }
+      }
+      catch
+      {
+         tCPClient.Close();
+         System.Console.WriteLine(TimeStamp() + ", " + clientID + " forcibly closed connection!");
+      }
+   }
+
+
+
+
+
+
+
+
+
+
+
+
    static void Main(string[] args)
    {
       Server server = new Server(serverIPAddress, serverPort);
@@ -51,75 +131,6 @@ class Server
       catch
       {
          serverTCPListener.Stop();
-      }
-   }
-   public void ReceiveSendOnStream(Object obj)
-   {
-      TcpClient tCPClient = (TcpClient)obj;
-      NetworkStream stream = tCPClient.GetStream();
-
-      string clientID = null;
-      string levelID = null;
-      try
-      {
-         // Get command
-         string command = ReadSendOnStreamCommand(stream);
-         if(command == "<SEND>")
-         {
-            // Initial Connection to get clientID
-            clientID = ReadSendOnStreamConnect(stream);
-
-            // Initial Connection to get clientID
-            levelID = ReadSendOnStreamConnect3(stream);
-            
-            // Receiving image
-            Image clientImage = ReadImageStream(stream);
-            System.Console.WriteLine("\nD\n");
-            // Saved to where images will be pulled from
-            string filename = TimeStamp() + "_" + clientID + "_" + levelID + ".jpg";
-            System.Console.WriteLine("\nE\n");
-            //string filePath1 = ".\\images\\" + levelID + "\\" + filename; // WINDOWS SLASH
-            string filePath1 = "./images/" + levelID + "/" + filename; // LINUX SLASH
-            System.Console.WriteLine("\nF\n");
-            System.Console.WriteLine("filePath1: " + filePath1);
-            System.Console.WriteLine("\nG\n");
-            clientImage.Save(filePath1);
-            System.Console.WriteLine("\nH\n");
-
-            System.Console.WriteLine(TimeStamp() + ", " + clientID + " image saved as: " + filename);
-
-            // Saved to html
-            //string filePath2 = "..\\..\\html\\images\\" + levelID + ".jpg"; // WINDOWS SLASH
-            string filePath2 = "../../html/images/" + levelID + ".jpg"; // LINUX SLASH
-            System.Console.WriteLine("filePath2: " + filePath2);
-            clientImage.Save(filePath2);
-
-            // Send file completion confirmation
-            WriteStream(stream, TimeStamp() + ", " + clientID + " Image received.");
-            tCPClient.Close();
-         }
-         if(command == "<REQUEST>")
-         {
-            // Initial Connection to get levelID for request
-            levelID = ReadSendOnStreamConnect2(stream);
-
-            //string[] filepaths = Directory.GetFiles(".\\images\\" + levelID); // WINDOWS SLASH
-            string[] filepaths = Directory.GetFiles("./images/" + levelID); // LINUX SLASH
-            int randIdx = random.Next(0, filepaths.Length);
-            System.Console.WriteLine("randIdx = " + randIdx + ", length = " + filepaths.Length);
-            string filepath = filepaths[randIdx];
-
-            System.Console.WriteLine(filepath);
-            // Sending image
-            SendReadOnStream(stream, imageToByteArray(Image.FromFile(filepath)));
-            WriteStream(stream, TimeStamp() + ", Image sent: " + filepath);
-            tCPClient.Close();
-         }
-      }
-      catch
-      {
-         //tCPClient.Close();
-         System.Console.WriteLine(TimeStamp() + ", " + clientID + " forcibly closed connection!");
       }
    }
    public static string TimeStamp()
