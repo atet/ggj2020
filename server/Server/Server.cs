@@ -42,6 +42,7 @@ class Server
          while(true)
          {
             TcpClient tCPClient = serverTCPListener.AcceptTcpClient();
+            tCPClient.Client.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.KeepAlive, true);
             Thread thread = new Thread(
                new ParameterizedThreadStart(ReceiveSendOnStream)
             );
@@ -56,7 +57,6 @@ class Server
    public void ReceiveSendOnStream(Object obj)
    {
       TcpClient tCPClient = (TcpClient)obj;
-      tCPClient.Client.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.KeepAlive, true);
       NetworkStream stream = tCPClient.GetStream();
 
       string clientID = null;
