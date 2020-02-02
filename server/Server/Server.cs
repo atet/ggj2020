@@ -84,7 +84,6 @@ class Server
             int imageByteArraySize = imageByteArray.Length;
             // Send byte array size info
 
-
             // Sending image
             SendReadOnStream(stream, imageByteArray);
             WriteStream(stream, TimeStamp() + ", Image sent: " + filepath);

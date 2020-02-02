@@ -93,11 +93,19 @@ class Client
       SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes(levelID));
 
       // Body of communication, Wait to confirm receipt
-      SendReadOnStream(stream, imageToByteArray(Image.FromFile(filePathSend)));
+      //SendReadOnStream(stream, imageToByteArray(Image.FromFile(filePathSend)));
 
-      Thread.Sleep(5000);
+
+      // Read in image locally
+      Byte[] imageByteArray = imageToByteArray(Image.FromFile(filePathSend));
+      // Determine byte array size
+      int imageByteArraySize = imageByteArray.Length;
+      SendReadOnStream(stream, imageByteArray);
+      //WriteStream(stream, "Image sent: " + filePathSend);
+
+      //Thread.Sleep(5000);
       // Close stream communication
-      stream.Close();
+      // stream.Close();
       client.Close();
       
       System.Console.WriteLine("F");
