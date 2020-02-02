@@ -7,14 +7,14 @@ class Client
 { 
    static void Main(string[] args)
    {
-
-
-      // string dirRead = ".\\imageRead\\";
+      string dirRead = ".\\imageRead\\";
       // RequestImageSaveToFile(dirRead, "01", "165.227.54.194");
+      RequestImageSaveToFile(dirRead, "01", "127.0.0.1");
 
-      string filePathSend;
-      filePathSend = ".\\imageSend\\01.jpg";
-      SendImageFromFile(filePathSend, "client1", "165.227.54.194");
+      // string filePathSend;
+      // filePathSend = ".\\imageSend\\01.jpg";
+      // // SendImageFromFile(filePathSend, "client1", "165.227.54.194");
+      // SendImageFromFile(filePathSend, "client1", "127.0.0.1");
 
       // filePathSend = ".\\imageSend\\01.jpg";
       // SendImageFromFile(filePathSend, "client1");
@@ -84,6 +84,7 @@ class Client
 
       // Body of communication, Wait to confirm receipt
       SendReadOnStream(stream, imageToByteArray(Image.FromFile(filePathSend)));
+
       
       // Close stream communication
       stream.Close();
@@ -182,13 +183,13 @@ class Client
       Image returnImage = Image.FromStream(ms);
       return returnImage;
    }
-   static public byte[] imageToByteArray(System.Drawing.Image imageIn)
+   public static byte[] imageToByteArray(Image imageIn)
    {
       MemoryStream ms = new MemoryStream();
-      imageIn.Save(ms,System.Drawing.Imaging.ImageFormat.Gif);
+      imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
       return ms.ToArray();
    }
-   static Image ReadImageStream(NetworkStream stream, int byteArraySize = 1024000) // Image
+   public static Image ReadImageStream(NetworkStream stream, int byteArraySize = 1024000) // Image
    {
       Byte[] byteArray = new Byte[byteArraySize];
       int bytes = stream.Read(byteArray, 0, byteArray.Length);
