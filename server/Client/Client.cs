@@ -83,7 +83,7 @@ class Client
       SendReadOnStream(stream, System.Text.Encoding.ASCII.GetBytes(levelID));
 
       // Body of communication, Wait to confirm receipt
-      //SendReadOnStream(stream, imageToByteArray(Image.FromFile(filePathSend)));
+      SendReadOnStream(stream, imageToByteArray(Image.FromFile(filePathSend)));
       
       // Close stream communication
       stream.Close();

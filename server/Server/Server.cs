@@ -48,7 +48,7 @@ class Server
             System.Console.WriteLine("\nH\n");
             System.Console.WriteLine(TimeStamp() + ", " + clientID + " image saved as: " + filename);
             // Saved to html dirs
-            string filePath2 = "..\\..\\html\\images\\" + levelID + ".jpg"; // WINDOWS SLASH
+            //string filePath2 = "..\\..\\html\\images\\" + levelID + ".jpg"; // WINDOWS SLASH
             string filePath2 = "../../html/images/" + levelID + ".jpg"; // LINUX SLASH
             System.Console.WriteLine("filePath2: " + filePath2);
             clientImage.Save(filePath2);
