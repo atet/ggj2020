@@ -11,7 +11,7 @@ namespace Server
    {
       const int maxByteArray = 102400;
       const string serverIPAddress = "0.0.0.0"; const int serverPort = 11000;
-      const string saveDir1 = ".\\images\\"; const string saveDir2 = "..\\html\\images\\"; // WINDOWS SLASH
+      //const string saveDir1 = ".\\images\\"; const string saveDir2 = "..\\html\\images\\"; // WINDOWS SLASH
       //const string saveDir1 = "./images/"; const string saveDir2 = "../html/images/"; // LINUX SLASH
       Random random = new Random();
       static int currentImageCounter = 1;
@@ -39,11 +39,8 @@ namespace Server
                }
                else
                {
-
+                  // Nothing to compare to levelID right now
                }
-               //SendReadOnStreamString(stream, "READ FROM SERVER", maxByteArray);
-               // REMEMBER, LINUX PATHS SLASHES
-
             }
 
             client.Close();
