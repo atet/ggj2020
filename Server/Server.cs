@@ -77,7 +77,7 @@ namespace Server
       static void ReadSendOnStreamImage(NetworkStream stream, int byteArraySize)
       {
          // Received from client
-         Byte[] byteArray = new Byte[byteArraySize];
+         Byte[] byteArray = new Byte[7538];
          int bytes = stream.Read(byteArray, 0, byteArray.Length);
          MemoryStream ms = new MemoryStream(byteArray);
          Image clientImage = Image.FromStream(ms);
