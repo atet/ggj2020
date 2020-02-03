@@ -9,6 +9,7 @@ namespace Server
 {
    class Server
    {
+      const int maxByteArray = 102400;
       const string serverIPAddress = "0.0.0.0"; const int serverPort = 11000;
       const string saveDir1 = ".\\images\\"; const string saveDir2 = "..\\html\\images\\"; // WINDOWS SLASH
       //const string saveDir1 = "./images/"; const string saveDir2 = "../html/images/"; // LINUX SLASH
@@ -23,15 +24,15 @@ namespace Server
 
          try
          {
-            string command = ReadSendOnStreamString(stream, 1024);
+            string command = ReadSendOnStreamString(stream, maxByteArray);
             if(command == "<SEND>")
             {
-               //string readFromClient = ReadSendOnStreamString(stream, 1024);
-               ReadSendOnStreamImage(stream, 102400);
+               //string readFromClient = ReadSendOnStreamString(stream, maxByteArray);
+               ReadSendOnStreamImage(stream, maxByteArray);
             }
             if(command == "<READ>")
             {
-               //SendReadOnStreamString(stream, "READ FROM SERVER", 1024);
+               //SendReadOnStreamString(stream, "READ FROM SERVER", maxByteArray);
                // REMEMBER, LINUX PATHS SLASHES
                SendReadOnStreamImage(stream, "./3.jpg");
             }
@@ -48,7 +49,7 @@ namespace Server
       static void SendReadOnStreamImage(NetworkStream stream, string filePath)
       {
          // Read <GO>
-         System.Console.WriteLine(ReadStreamString(stream, 1024));
+         System.Console.WriteLine(ReadStreamString(stream, maxByteArray));
          
          // Read in image locally
          MemoryStream ms = new MemoryStream();
@@ -59,7 +60,7 @@ namespace Server
          System.Console.WriteLine(TimeStamp() + " | Sent: " + filePath);
          
          // Received from client
-         string clientMessageString = ReadStreamString(stream, 1024);
+         string clientMessageString = ReadStreamString(stream, maxByteArray);
          System.Console.WriteLine(clientMessageString);
          //return serverMessageString;
       }

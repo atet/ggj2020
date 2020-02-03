@@ -8,6 +8,7 @@ namespace Client
 {
    class Client
    {
+      const int maxByteArray = 102400; 
       //const string serverIPAddress = "127.0.0.1"; const int serverPort = 11000;
       const string serverIPAddress = "ggj.atetkao.com"; const int serverPort = 11000;
       string clientID = "client1";
@@ -25,8 +26,8 @@ namespace Client
          NetworkStream stream = client.GetStream();
          try
          {
-            SendReadOnStreamString(stream, "<SEND>", 1024);
-            //SendReadOnStreamString(stream, "PACKAGE FROM CLIENT", 1024);
+            SendReadOnStreamString(stream, "<SEND>", maxByteArray);
+            //SendReadOnStreamString(stream, "PACKAGE FROM CLIENT", maxByteArray);
             SendReadOnStreamImage(stream, ".\\1.jpg");
             //SendReadOnStreamImage(stream, ".\\images\\1.jpg");
             stream.Close(); client.Close(); System.Console.WriteLine(TimeStamp() + " | Gracefully closed connection.");
@@ -42,9 +43,9 @@ namespace Client
          NetworkStream stream = client.GetStream();
          try
          {
-            SendReadOnStreamString(stream, "<READ>", 1024);
-            //ReadSendOnStreamString(stream, 1024);
-            ReadSendOnStreamImage(stream, 102400);
+            SendReadOnStreamString(stream, "<READ>", maxByteArray);
+            //ReadSendOnStreamString(stream, maxByteArray);
+            ReadSendOnStreamImage(stream, maxByteArray);
             stream.Close(); client.Close(); System.Console.WriteLine(TimeStamp() + " | Gracefully closed connection.");
          }
          catch
@@ -93,7 +94,7 @@ namespace Client
          WriteStreamByteArray(stream, imageByteArray);
          System.Console.WriteLine(TimeStamp() + " | Sent: " + filePath);
          // Received from server
-         string serverMessageString = ReadStreamString(stream, 1024);
+         string serverMessageString = ReadStreamString(stream, maxByteArray);
          System.Console.WriteLine(serverMessageString);
          //return serverMessageString;
       }
