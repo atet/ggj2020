@@ -9,7 +9,7 @@ namespace Server
 {
    class Server
    {
-      const int maxByteArray = 102400;
+      const int maxByteArray = 10240;
       const string serverIPAddress = "0.0.0.0"; const int serverPort = 11000;
       const string saveDir1 = ".\\images\\"; const string saveDir2 = "..\\html\\images\\"; // WINDOWS SLASH
       //const string saveDir1 = "./images/"; const string saveDir2 = "../html/images/"; // LINUX SLASH
