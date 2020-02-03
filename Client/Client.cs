@@ -28,8 +28,8 @@ namespace Client
          {
             SendReadOnStreamString(stream, "<SEND>", maxByteArray);
             //SendReadOnStreamString(stream, "PACKAGE FROM CLIENT", maxByteArray);
-            SendReadOnStreamImage(stream, ".\\1.jpg");
-            //SendReadOnStreamImage(stream, ".\\images\\1.jpg");
+            SendReadOnStreamImage(stream, ".\\1.png");
+            //SendReadOnStreamImage(stream, ".\\images\\1.png");
             stream.Close(); client.Close(); System.Console.WriteLine(TimeStamp() + " | Gracefully closed connection.");
          }
          catch
@@ -65,7 +65,7 @@ namespace Client
          Image serverImage = Image.FromStream(ms);
 
          // Save out
-         string filePath = ".//" + TimeStamp() + "_IMAGE_FROM_SERVER.jpg";
+         string filePath = ".//" + TimeStamp() + "_IMAGE_FROM_SERVER.png";
          serverImage.Save(filePath);
 
          // Send back to server
@@ -87,7 +87,7 @@ namespace Client
       {
          // Read in image locally
          MemoryStream ms = new MemoryStream();
-         Image.FromFile(filePath).Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+         Image.FromFile(filePath).Save(ms, System.Drawing.Imaging.ImageFormat.Png);
          Byte[] imageByteArray = ms.ToArray();
 
          // Send to server
