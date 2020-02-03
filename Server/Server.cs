@@ -82,6 +82,7 @@ namespace Server
          MemoryStream ms = new MemoryStream(byteArray);
          Image clientImage = Image.FromStream(ms);
 
+
          string filePath = "./10.jpg";
          //string filePath = "./" + TimeStamp() + ".jpg";
          //string filePath = "../html/images/" + currentImageCounter + ".jpg"; 
