@@ -8,18 +8,16 @@ namespace Client
    class Client
    {
       const int maxByteArray = 102400; 
-      //const string serverIPAddress = "127.0.0.1"; const int serverPort = 11000;
-      const string serverIPAddress = "ggj.atetkao.com"; const int serverPort = 11000;
-      //string clientID = "client1";
-      //string levelID = "01";
+      const string serverIPAddress = "ggj.atetkao.com"; const int serverPort = 11000; //const string serverIPAddress = "127.0.0.1"; const int serverPort = 11000;
       string byteArrayLength = null;
-      static void Main(string[] args)
+      // static void Main(string[] args)
+      // {
+      //    Send(".\\images\\BENCHMARK_CLIENT.jpg");
+      //    Read(".\\images\\BENCHMARK_SERVER.jpg", "BENCHMARK_SERVER");
+      // }
+      static void Send(string filePathName)
       {
-         Send(".\\images\\BENCHMARK_CLIENT.jpg");
-         Read(".\\images\\BENCHMARK_SERVER.jpg", "BENCHMARK_SERVER");
-      }
-      static void Send(string filePathName) // Windows filepath slashes:  ".\\images\\1.jpg"
-      {
+         // filePathName: Where do you want image to be saved, remember Windows filepath slashes:  ".\\images\\1.jpg"
          TcpClient client = new TcpClient(serverIPAddress, serverPort);
          NetworkStream stream = client.GetStream();
          try
@@ -33,9 +31,10 @@ namespace Client
             stream.Close(); client.Close(); System.Console.WriteLine(TimeStamp() + " | Forcibly closed connection!");
          }
       }
-      static void Read(string filePathName, string levelID = "BENCHMARK_SERVER") // Where do you want image to be saved Windows filepath slashes:  ".\\images\\1.jpg"
+      static void Read(string filePathName, string levelID = "BENCHMARK_SERVER") 
       { 
-         // BENCHMARK returns an image from server
+         // filePathName: Where do you want image to be saved, remember Windows filepath slashes:  ".\\images\\1.jpg"
+         // levelID: BENCHMARK returns an image from server, use this to send levelID to retreive appropriate images
          
          TcpClient client = new TcpClient(serverIPAddress, serverPort);
          NetworkStream stream = client.GetStream();
