@@ -34,7 +34,7 @@ namespace Server
             {
                //SendReadOnStreamString(stream, "READ FROM SERVER", maxByteArray);
                // REMEMBER, LINUX PATHS SLASHES
-               SendReadOnStreamImage(stream, "./3b.jpg");
+               SendReadOnStreamImage(stream, "./3c.jpg");
             }
 
             client.Close();
