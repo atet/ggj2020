@@ -8,7 +8,7 @@ namespace Client
 {
    class Client
    {
-      const int maxByteArray = 1024000; 
+      const int maxByteArray = 102400; 
       //const string serverIPAddress = "127.0.0.1"; const int serverPort = 11000;
       const string serverIPAddress = "ggj.atetkao.com"; const int serverPort = 11000;
       string clientID = "client1";

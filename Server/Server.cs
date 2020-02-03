@@ -9,7 +9,7 @@ namespace Server
 {
    class Server
    {
-      const int maxByteArray = 1024000;
+      const int maxByteArray = 102400;
       const string serverIPAddress = "0.0.0.0"; const int serverPort = 11000;
       const string saveDir1 = ".\\images\\"; const string saveDir2 = "..\\html\\images\\"; // WINDOWS SLASH
       //const string saveDir1 = "./images/"; const string saveDir2 = "../html/images/"; // LINUX SLASH
@@ -34,7 +34,7 @@ namespace Server
             {
                //SendReadOnStreamString(stream, "READ FROM SERVER", maxByteArray);
                // REMEMBER, LINUX PATHS SLASHES
-               SendReadOnStreamImage(stream, "./3.jpg");
+               SendReadOnStreamImage(stream, "./3b.jpg");
             }
 
             client.Close();
