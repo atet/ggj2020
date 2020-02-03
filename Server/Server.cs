@@ -34,7 +34,7 @@ namespace Server
             {
                //SendReadOnStreamString(stream, "READ FROM SERVER", maxByteArray);
                // REMEMBER, LINUX PATHS SLASHES
-               SendReadOnStreamImage(stream, "./10.png");
+               SendReadOnStreamImage(stream, "./10.jpg");
             }
 
             client.Close();
@@ -53,7 +53,7 @@ namespace Server
          
          // Read in image locally
          MemoryStream ms = new MemoryStream();
-         Image.FromFile(filePath).Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+         Image.FromFile(filePath).Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
          Byte[] imageByteArray = ms.ToArray();
          // Send to client
          WriteStreamByteArray(stream, imageByteArray);
@@ -82,9 +82,9 @@ namespace Server
          MemoryStream ms = new MemoryStream(byteArray);
          Image clientImage = Image.FromStream(ms);
 
-         string filePath = "./10.png";
-         //string filePath = "./" + TimeStamp() + ".png";
-         //string filePath = "../html/images/" + currentImageCounter + ".png"; 
+         string filePath = "./10.jpg";
+         //string filePath = "./" + TimeStamp() + ".jpg";
+         //string filePath = "../html/images/" + currentImageCounter + ".jpg"; 
          clientImage.Save(filePath);
 
          // Send back to client
