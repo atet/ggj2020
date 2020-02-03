@@ -16,7 +16,7 @@ namespace Client
       string byteArrayLength = null;
       static void Main(string[] args)
       {
-         //Send();
+         Send();
          Read();
       }
 
@@ -89,6 +89,8 @@ namespace Client
          MemoryStream ms = new MemoryStream();
          Image.FromFile(filePath).Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
          Byte[] imageByteArray = ms.ToArray();
+
+         System.Console.WriteLine("Image Byte lenght: " + imageByteArray.Length.ToString());
 
          // Send to server
          WriteStreamByteArray(stream, imageByteArray);
