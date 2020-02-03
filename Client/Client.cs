@@ -16,7 +16,7 @@ namespace Client
       string byteArrayLength = null;
       static void Main(string[] args)
       {
-         //Send();
+         Send();
          Read();
       }
 
