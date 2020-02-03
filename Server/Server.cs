@@ -32,9 +32,18 @@ namespace Server
             }
             if(command == "<READ>")
             {
+               string levelID = ReadSendOnStreamString(stream, maxByteArray);
+               if(levelID == "BENCHMARK_SERVER")
+               {
+                  SendReadOnStreamImage(stream, "./images/BENCHMARK_SERVER.jpg");
+               }
+               else
+               {
+
+               }
                //SendReadOnStreamString(stream, "READ FROM SERVER", maxByteArray);
                // REMEMBER, LINUX PATHS SLASHES
-               SendReadOnStreamImage(stream, "./images/BENCHMARK.jpg");
+
             }
 
             client.Close();
@@ -83,20 +92,15 @@ namespace Server
          Image clientImage = Image.FromStream(ms);
 
 
-         string filePath = "./10.jpg";
+         //string filePath = "./10.jpg";
          //string filePath = "./" + TimeStamp() + ".jpg";
-         //string filePath = "../html/images/" + currentImageCounter + ".jpg"; 
+         string filePath = "../html/images/" + currentImageCounter + ".jpg"; currentImageCounter++; if(currentImageCounter > 12){currentImageCounter = 1;}
          clientImage.Save(filePath);
 
          // Send back to client
          string serverMessageString = TimeStamp() + " | Received image save as: " + filePath;
          WriteStreamString(stream, serverMessageString);
          Console.WriteLine(serverMessageString);
-
-         // Save out
-         //
-
-         //currentImageCounter++; if(currentImageCounter > 12){currentImageCounter = 1;}
       }
       static void SendReadOnStreamString(NetworkStream stream, string serverMessageString, int byteArraySize)
       {
