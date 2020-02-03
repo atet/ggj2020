@@ -10,11 +10,11 @@ namespace Client
       const int maxByteArray = 102400; 
       const string serverIPAddress = "ggj.atetkao.com"; const int serverPort = 11000; //const string serverIPAddress = "127.0.0.1"; const int serverPort = 11000;
       string byteArrayLength = null;
-      // static void Main(string[] args)
-      // {
-      //    Send(".\\images\\BENCHMARK_CLIENT.jpg");
-      //    Read(".\\images\\BENCHMARK_SERVER.jpg", "BENCHMARK_SERVER");
-      // }
+      static void Main(string[] args)
+      {
+         Send(".\\images\\BENCHMARK_CLIENT.jpg");
+         Read(".\\images\\BENCHMARK_SERVER.jpg", "BENCHMARK_SERVER");
+      }
       public static void Send(string filePathName)
       {
          // filePathName: Where do you want image to be saved, remember Windows filepath slashes:  ".\\images\\1.jpg"
@@ -79,7 +79,10 @@ namespace Client
       {
          // Read in image locally
          MemoryStream ms = new MemoryStream();
-         Image.FromFile(filePath).Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+         Image thisImage = Image.FromFile(filePath);
+         thisImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+         
          Byte[] imageByteArray = ms.ToArray();
          // Send to server
          WriteStreamByteArray(stream, imageByteArray);
