@@ -43,7 +43,7 @@ namespace Client
          // Determine byte length
          int imageByteLength = imageByteArray.Length;
          // Send byte length to server, receive confirmation
-         SendReadOnStreamString(stream, imageByteLength.ToString(), 32);
+         SendReadOnStreamString(stream, imageByteLength.ToString(), 1024);
          
          // Send image to server
          WriteStreamByteArray(stream, imageByteArray);

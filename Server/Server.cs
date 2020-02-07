@@ -53,21 +53,22 @@ namespace Server
          string clientID = ReadSendOnStreamString(stream, 1024);
          // Receive imageByteLength
          int imageByteLength = Int32.Parse(ReadSendOnStreamString(stream, 1024));
+         
          // Receive image
          Byte[] byteArray = new Byte[imageByteLength];
          stream.Read(byteArray, 0, imageByteLength);
+         // Send back to client
+         string serverMessageString = $"{ TimeStamp() } | Received image of imageByteLength { imageByteLength }";
+         WriteStreamString(stream, serverMessageString);
+         Console.WriteLine(serverMessageString);
 
          // Save image locally
          string filePath1 = $"./images/{ TimeStamp() }_{ clientID }.jpg";
          System.IO.File.WriteAllBytes(filePath1, byteArray);
-
          string filePath2 = $"../html/images/{ currentImageCounter }.jpg";
          currentImageCounter++; if(currentImageCounter > maxImageCount){ currentImageCounter = 1; }
          System.IO.File.WriteAllBytes(filePath2, byteArray);
-
-         // Send back to client
-         string serverMessageString = $"{ TimeStamp() } | Received image saved as: { filePath1 }";
-         WriteStreamString(stream, serverMessageString);
+         serverMessageString = $"{ TimeStamp() } | Image saved as: { filePath1 }";
          Console.WriteLine(serverMessageString);
       }
       static string ReadStreamString(NetworkStream stream, int byteArraySize)
