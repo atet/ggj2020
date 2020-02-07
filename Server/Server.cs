@@ -50,15 +50,15 @@ namespace Server
       static void ReadSendOnStreamImage(NetworkStream stream, int byteArraySize)
       {
          // Receive clientID
-         string clientID = ReadSendOnStreamString(stream, 32);
+         string clientID = ReadSendOnStreamString(stream, 1024);
          // Receive imageByteLength
-         int imageByteLength = Int32.Parse(ReadSendOnStreamString(stream, 32));
+         int imageByteLength = Int32.Parse(ReadSendOnStreamString(stream, 1024));
          // Receive image
          Byte[] byteArray = new Byte[imageByteLength];
          stream.Read(byteArray, 0, imageByteLength);
 
          // Save image locally
-         string filePath1 = $"./ { TimeStamp() }_{ clientID }.jpg";
+         string filePath1 = $"./images/{ TimeStamp() }_{ clientID }.jpg";
          System.IO.File.WriteAllBytes(filePath1, byteArray);
 
          string filePath2 = $"../html/images/{ currentImageCounter }.jpg";

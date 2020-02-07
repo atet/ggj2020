@@ -24,7 +24,7 @@ namespace Client
          NetworkStream stream = client.GetStream();
          try
          {
-            SendReadOnStreamString(stream, "<SEND>", 32);
+            SendReadOnStreamString(stream, "<SEND>", 1024);
             SendReadOnStreamImage(stream, filePathName);
             stream.Close(); client.Close(); System.Console.WriteLine(TimeStamp() + " | Gracefully closed connection.");
          }
@@ -36,7 +36,7 @@ namespace Client
       static void SendReadOnStreamImage(NetworkStream stream, string filePath)
       {
          // Send clientID to server, receive confirmation
-         SendReadOnStreamString(stream, GetClientID(), 32);
+         SendReadOnStreamString(stream, GetClientID(), 1024);
 
          // Read in image locally
          byte[] imageByteArray = System.IO.File.ReadAllBytes(filePath);
@@ -49,7 +49,7 @@ namespace Client
          WriteStreamByteArray(stream, imageByteArray);
          System.Console.WriteLine(TimeStamp() + " | Sent: " + filePath);
          // Received from server
-         string serverMessageString = ReadStreamString(stream, 32);
+         string serverMessageString = ReadStreamString(stream, 1024);
          System.Console.WriteLine(serverMessageString);
       }
       static void SendReadOnStreamString(NetworkStream stream, string clientMessageString, int byteArraySize)
