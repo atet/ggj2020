@@ -792,7 +792,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
       "Microsoft.NETCore.App >= 2.2.0",
-      "System.Drawing.Common"
+      "System.Drawing.Common >= 4.7.0"
     ]
   },
   "packageFolders": {
@@ -842,7 +842,7 @@
           },
           "System.Drawing.Common": {
             "target": "Package",
-            "version": "(, )"
+            "version": "[4.7.0, )"
           }
         },
         "imports": [

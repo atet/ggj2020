@@ -2,19 +2,21 @@
 using System.Net.Sockets;
 using System.Drawing;
 using System.IO;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Text.RegularExpressions;
 
 namespace Client
 {
    public class Client
    {
-      const int maxByteArray = 102400; 
-      const string serverIPAddress = "ggj.atetkao.com"; const int serverPort = 11000; //const string serverIPAddress = "127.0.0.1"; const int serverPort = 11000;
-      string byteArrayLength = null;
+      const string serverIPAddress = "ggj.atetkao.com"; const int serverPort = 11000; // const string serverIPAddress = "127.0.0.1"; const int serverPort = 11000;
       static void Main(string[] args)
       {
-         Send(".\\images\\BENCHMARK_CLIENT.jpg");
-         Read(".\\images\\BENCHMARK_SERVER.jpg", "BENCHMARK_SERVER");
+         Send(@".\images\BENCHMARK_CLIENT.jpg");
+
       }
+
       public static void Send(string filePathName)
       {
          // filePathName: Where do you want image to be saved, remember Windows filepath slashes:  ".\\images\\1.jpg"
@@ -22,7 +24,7 @@ namespace Client
          NetworkStream stream = client.GetStream();
          try
          {
-            SendReadOnStreamString(stream, "<SEND>", maxByteArray);
+            SendReadOnStreamString(stream, "<SEND>", 32);
             SendReadOnStreamImage(stream, filePathName);
             stream.Close(); client.Close(); System.Console.WriteLine(TimeStamp() + " | Gracefully closed connection.");
          }
@@ -31,24 +33,24 @@ namespace Client
             stream.Close(); client.Close(); System.Console.WriteLine(TimeStamp() + " | Forcibly closed connection!");
          }
       }
-      public static void Read(string filePathName, string levelID = "BENCHMARK_SERVER") 
-      { 
-         // filePathName: Where do you want image to be saved, remember Windows filepath slashes:  ".\\images\\1.jpg"
-         // levelID: BENCHMARK returns an image from server, use this to send levelID to retreive appropriate images
+      static void SendReadOnStreamImage(NetworkStream stream, string filePath)
+      {
+         // Send clientID to server, receive confirmation
+         SendReadOnStreamString(stream, GetClientID(), 32);
+
+         // Read in image locally
+         byte[] imageByteArray = System.IO.File.ReadAllBytes(filePath);
+         // Determine byte length
+         int imageByteLength = imageByteArray.Length;
+         // Send byte length to server, receive confirmation
+         SendReadOnStreamString(stream, imageByteLength.ToString(), 32);
          
-         TcpClient client = new TcpClient(serverIPAddress, serverPort);
-         NetworkStream stream = client.GetStream();
-         try
-         {
-            SendReadOnStreamString(stream, "<READ>", maxByteArray);
-            SendReadOnStreamString(stream, levelID, maxByteArray);
-            ReadSendOnStreamImage(stream, filePathName, maxByteArray);
-            stream.Close(); client.Close(); System.Console.WriteLine(TimeStamp() + " | Gracefully closed connection.");
-         }
-         catch
-         {
-            stream.Close(); client.Close(); System.Console.WriteLine(TimeStamp() + " | Forcibly closed connection!");
-         }
+         // Send image to server
+         WriteStreamByteArray(stream, imageByteArray);
+         System.Console.WriteLine(TimeStamp() + " | Sent: " + filePath);
+         // Received from server
+         string serverMessageString = ReadStreamString(stream, 32);
+         System.Console.WriteLine(serverMessageString);
       }
       static void SendReadOnStreamString(NetworkStream stream, string clientMessageString, int byteArraySize)
       {
@@ -58,47 +60,6 @@ namespace Client
          // Received from server
          string serverMessageString = ReadStreamString(stream, byteArraySize);
          System.Console.WriteLine(serverMessageString);
-      }
-      static void ReadSendOnStreamImage(NetworkStream stream, string filePathName, int byteArraySize)
-      {
-         // Must write
-         WriteStreamString(stream, "<GO>");
-         // Received from server
-         Byte[] byteArray = new Byte[byteArraySize];
-         int bytes = stream.Read(byteArray, 0, byteArray.Length);
-         MemoryStream ms = new MemoryStream(byteArray);
-         Image serverImage = Image.FromStream(ms);
-         // Save out
-         serverImage.Save(filePathName);
-         // Send back to server
-         string clientMessageString = TimeStamp() + " | Received image save as: " + filePathName;
-         WriteStreamString(stream, clientMessageString);
-         Console.WriteLine(clientMessageString);
-      }
-      static void SendReadOnStreamImage(NetworkStream stream, string filePath)
-      {
-         // Read in image locally
-         MemoryStream ms = new MemoryStream();
-
-         Image thisImage = Image.FromFile(filePath);
-         thisImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-         
-         Byte[] imageByteArray = ms.ToArray();
-         // Send to server
-         WriteStreamByteArray(stream, imageByteArray);
-         System.Console.WriteLine(TimeStamp() + " | Sent: " + filePath);
-         // Received from server
-         string serverMessageString = ReadStreamString(stream, maxByteArray);
-         System.Console.WriteLine(serverMessageString);
-      }
-      static void ReadSendOnStreamString(NetworkStream stream, int byteArraySize)
-      {
-         // Received from server
-         string serverMessageString = ReadStreamString(stream, byteArraySize);
-         // Send back to server
-         string clientMessageString = TimeStamp() + " | Received: " + serverMessageString;
-         WriteStreamString(stream, clientMessageString);
-         Console.WriteLine(clientMessageString);
       }
       static string ReadStreamString(NetworkStream stream, int byteArraySize)
       {
@@ -121,9 +82,28 @@ namespace Client
       {
          stream.Write(byteArray, 0, byteArray.Length);
       }
+
+      // ### HELPER FUNCTIONS ###
       public static string TimeStamp()
       {
          return DateTime.Now.ToString("yyyyMMddHHmmssffff");
+      }
+      public static string GetClientID()
+      {
+         string hostName = Dns.GetHostName(); // Retrive the Name of HOST    
+         string myIP = Dns.GetHostAddresses(hostName)[0].ToString();
+
+         string macAddress = "";
+         foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
+         {
+            if (nic.OperationalStatus == OperationalStatus.Up)
+            {
+               macAddress += nic.GetPhysicalAddress().ToString();
+               break;
+            }
+         }
+         string clientID = Regex.Replace(macAddress + "_" + myIP, @"[^A-Za-z0-9_]+", "");
+         return clientID;
       }
    }
 }

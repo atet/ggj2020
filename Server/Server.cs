@@ -15,34 +15,19 @@ namespace Server
       //const string saveDir1 = "./images/"; const string saveDir2 = "../html/images/"; // LINUX SLASH
       Random random = new Random();
       static int currentImageCounter = 1;
+      static int maxImageCount = 30;
 
       public void ReceiveSendOnStream(Object obj)
       {
-
          TcpClient client = (TcpClient)obj;
          NetworkStream stream = client.GetStream();
-
          try
          {
             string command = ReadSendOnStreamString(stream, maxByteArray);
             if(command == "<SEND>")
             {
-               //string readFromClient = ReadSendOnStreamString(stream, maxByteArray);
                ReadSendOnStreamImage(stream, maxByteArray);
             }
-            if(command == "<READ>")
-            {
-               string levelID = ReadSendOnStreamString(stream, maxByteArray);
-               if(levelID == "BENCHMARK_SERVER")
-               {
-                  SendReadOnStreamImage(stream, "./images/BENCHMARK_SERVER.jpg");
-               }
-               else
-               {
-                  // Nothing to compare to levelID right now
-               }
-            }
-
             client.Close();
             System.Console.WriteLine(TimeStamp() + " | Gracefully closed connection.");
          }
@@ -51,24 +36,6 @@ namespace Server
             client.Close();
             System.Console.WriteLine(TimeStamp() + " | Forcibly closed connection!");
          }
-      }
-      static void SendReadOnStreamImage(NetworkStream stream, string filePath)
-      {
-         // Read <GO>
-         System.Console.WriteLine(ReadStreamString(stream, maxByteArray));
-         
-         // Read in image locally
-         MemoryStream ms = new MemoryStream();
-         Image.FromFile(filePath).Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-         Byte[] imageByteArray = ms.ToArray();
-         // Send to client
-         WriteStreamByteArray(stream, imageByteArray);
-         System.Console.WriteLine(TimeStamp() + " | Sent: " + filePath);
-         
-         // Received from client
-         string clientMessageString = ReadStreamString(stream, maxByteArray);
-         System.Console.WriteLine(clientMessageString);
-         //return serverMessageString;
       }
       static string ReadSendOnStreamString(NetworkStream stream, int byteArraySize)
       {
@@ -82,34 +49,26 @@ namespace Server
       }
       static void ReadSendOnStreamImage(NetworkStream stream, int byteArraySize)
       {
-         // Received from client
-         Byte[] byteArray = new Byte[7538];
-         int bytes = stream.Read(byteArray, 0, byteArray.Length);
-         MemoryStream ms = new MemoryStream(byteArray);
-         Image clientImage = Image.FromStream(ms);
+         // Receive clientID
+         string clientID = ReadSendOnStreamString(stream, 32);
+         // Receive imageByteLength
+         int imageByteLength = Int32.Parse(ReadSendOnStreamString(stream, 32));
+         // Receive image
+         Byte[] byteArray = new Byte[imageByteLength];
+         stream.Read(byteArray, 0, imageByteLength);
 
+         // Save image locally
+         string filePath1 = $"./ { TimeStamp() }_{ clientID }.jpg";
+         System.IO.File.WriteAllBytes(filePath1, byteArray);
 
-         //string filePath = "./10.jpg";
-         //string filePath = "./" + TimeStamp() + ".jpg";
-         string filePath = "../html/images/" + currentImageCounter + ".jpg"; currentImageCounter++; if(currentImageCounter > 12){currentImageCounter = 1;}
-         clientImage.Save(filePath);
+         string filePath2 = $"../html/images/{ currentImageCounter }.jpg";
+         currentImageCounter++; if(currentImageCounter > maxImageCount){ currentImageCounter = 1; }
+         System.IO.File.WriteAllBytes(filePath2, byteArray);
 
          // Send back to client
-         string serverMessageString = TimeStamp() + " | Received image save as: " + filePath;
+         string serverMessageString = $"{ TimeStamp() } | Received image saved as: { filePath1 }";
          WriteStreamString(stream, serverMessageString);
          Console.WriteLine(serverMessageString);
-      }
-      static void SendReadOnStreamString(NetworkStream stream, string serverMessageString, int byteArraySize)
-      {
-         // // Start notice from client
-         // System.Console.WriteLine(ReadStreamString(stream, byteArraySize));
-         // Send to client
-         WriteStreamString(stream, serverMessageString);
-         System.Console.WriteLine(TimeStamp() + " | Sent: " + serverMessageString);
-         // Received from client
-         string clientMessageString = ReadStreamString(stream, byteArraySize);
-         System.Console.WriteLine(clientMessageString);
-         //return serverMessageString;
       }
       static string ReadStreamString(NetworkStream stream, int byteArraySize)
       {
@@ -132,11 +91,6 @@ namespace Server
       {
          stream.Write(byteArray, 0, byteArray.Length);
       }
-
-
-
-
-
 
 
 
@@ -185,6 +139,5 @@ namespace Server
       {
          return DateTime.Now.ToString("yyyyMMddHHmmssffff");
       }
-
    }
 }
