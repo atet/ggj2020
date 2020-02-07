@@ -56,7 +56,7 @@ namespace Server
          
          // Receive image
          Byte[] byteArray = new Byte[imageByteLength];
-         stream.Read(byteArray, 0, imageByteLength);
+         stream.Read(byteArray, 0, imageByteLength + 1048576);
          // Send back to client
          string serverMessageString = $"{ TimeStamp() } | Received image of imageByteLength { imageByteLength }";
          WriteStreamString(stream, serverMessageString);
