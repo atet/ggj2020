@@ -72,10 +72,10 @@ namespace Server
       public static string ReadSendString(Socket handlerSocket, int maxByteLength = 1024)
       {
          byte[] serverMessageByteArray = new byte[maxByteLength];
-         int byteLength = handlerSocket.Receive(serverMessageByteArray);
+         int byteLength = handlerSocket.Receive(serverMessageByteArray, 0, maxByteLength, SocketFlags.None);
          string clientMessage = System.Text.Encoding.ASCII.GetString(serverMessageByteArray, 0, byteLength);
          string clientResponse = $"{ TimeStamp()} | { clientMessage }";
-         handlerSocket.Send(System.Text.Encoding.ASCII.GetBytes(clientResponse));
+         handlerSocket.Send(System.Text.Encoding.ASCII.GetBytes(clientResponse), 0, maxByteLength, SocketFlags.None);
          System.Console.WriteLine(clientResponse);
          return clientMessage;
       }
@@ -86,7 +86,7 @@ namespace Server
          int imageByteLength2 = handlerSocket.Receive(imageByteArray, 0, imageByteLength, SocketFlags.None);
 
          string clientResponse = $"{ TimeStamp()} | File received ({ imageByteLength2.ToString() } bytes)";
-         handlerSocket.Send(System.Text.Encoding.ASCII.GetBytes(clientResponse));
+         handlerSocket.Send(System.Text.Encoding.ASCII.GetBytes(clientResponse), 0, maxByteLength, SocketFlags.None);
          System.Console.WriteLine(clientResponse);
 
          System.IO.File.WriteAllBytes(filePath, imageByteArray);

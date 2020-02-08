@@ -46,8 +46,8 @@ namespace Client
       public static void SendReadString(Socket serverSocket, string clientMessage, int maxByteLength = 1024)
       {
          byte[] serverMessageByteArray = new byte[maxByteLength];
-         serverSocket.Send(System.Text.Encoding.ASCII.GetBytes(clientMessage));
-         int byteLength = serverSocket.Receive(serverMessageByteArray);
+         serverSocket.Send(System.Text.Encoding.ASCII.GetBytes(clientMessage), 0, maxByteLength, SocketFlags.None);
+         int byteLength = serverSocket.Receive(serverMessageByteArray, 0, maxByteLength, SocketFlags.None);
          System.Console.WriteLine(System.Text.Encoding.ASCII.GetString(serverMessageByteArray, 0, byteLength));
       }
       public static void SendReadFile(Socket serverSocket, string filePath, int maxByteLength = 1024)
@@ -57,10 +57,14 @@ namespace Client
          SendReadString(serverSocket, imageByteArray.Length.ToString());
          // Send file
          serverSocket.Send(imageByteArray, 0, imageByteArray.Length, SocketFlags.None);
+
+         Console.ReadKey();
+
          // Received confirmation
          byte[] serverMessageByteArray = new byte[maxByteLength];
-         int byteLength = serverSocket.Receive(serverMessageByteArray);
+         int byteLength = serverSocket.Receive(serverMessageByteArray, 0, maxByteLength, SocketFlags.None);
          System.Console.WriteLine(System.Text.Encoding.ASCII.GetString(serverMessageByteArray, 0, byteLength));
+
       }
 
 
