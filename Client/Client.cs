@@ -58,8 +58,6 @@ namespace Client
          // Send file
          serverSocket.Send(imageByteArray, 0, imageByteArray.Length, SocketFlags.None);
 
-         Console.ReadKey();
-
          // Received confirmation
          byte[] serverMessageByteArray = new byte[maxByteLength];
          int byteLength = serverSocket.Receive(serverMessageByteArray, 0, maxByteLength, SocketFlags.None);

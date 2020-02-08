@@ -36,8 +36,8 @@ namespace Server
 
                // 2. Receive fileByteArray
                // string filePathName = @".\images\BENCHMARK_CLIENT.jpg";
-               string filePathName = "../html/images/1.jpg";
-               ReadSendFile(handlerSocket, filePathName);
+               //string filePathName = "../html/images/1.jpg";
+               //ReadSendFile(handlerSocket, filePathName);
 
                // System.Console.WriteLine($"clientID: { clientID }");
                // System.Console.WriteLine($"imageByteLength: { imageByteLength }");
