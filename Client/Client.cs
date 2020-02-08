@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Sockets;
+
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Text.RegularExpressions;
@@ -45,21 +46,18 @@ namespace Client
       }
       public static void SendReadString(Socket serverSocket, string clientMessage, int maxByteLength = 1024)
       {
-         serverSocket.Send(System.Text.Encoding.ASCII.GetBytes(clientMessage));
          byte[] serverMessageByteArray = new byte[maxByteLength];
+         serverSocket.Send(System.Text.Encoding.ASCII.GetBytes(clientMessage));
          int byteLength = serverSocket.Receive(serverMessageByteArray);
          System.Console.WriteLine(System.Text.Encoding.ASCII.GetString(serverMessageByteArray, 0, byteLength));
       }
-
-
       public static void SendReadFile(Socket serverSocket, string filePath, int maxByteLength = 1024)
       {
          byte[] imageByteArray = System.IO.File.ReadAllBytes(filePath);
          // Determine file's byte length
          SendReadString(serverSocket, imageByteArray.Length.ToString());
          // Send file
-         serverSocket.SendFile(filePath);
-
+         serverSocket.Send(imageByteArray);
          // Received confirmation
          byte[] serverMessageByteArray = new byte[maxByteLength];
          int byteLength = serverSocket.Receive(serverMessageByteArray);

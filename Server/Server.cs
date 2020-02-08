@@ -13,6 +13,8 @@ namespace Server
       // static int currentImageCounter = 1;
       // static int maxImageCount = 30;
 
+
+
       public static int Main(String[] args)
       {
          string serverHostName = "ggj.atetkao.com";
@@ -35,8 +37,7 @@ namespace Server
                string clientID = ReadSendString(handlerSocket);
 
                // 2. Receive fileByteArray
-               //string filePathName = @".\images\BENCHMARK_CLIENT.jpg";
-               string filePathName = "../html/images/1.jpg";
+               string filePathName = @".\images\BENCHMARK_CLIENT.jpg";
                ReadSendFile(handlerSocket, filePathName);
 
                // System.Console.WriteLine($"clientID: { clientID }");
@@ -83,10 +84,10 @@ namespace Server
       {
          int imageByteLength = Int32.Parse(ReadSendString(handlerSocket, maxByteLength));
          byte[] imageByteArray = new byte[imageByteLength];
-         int imageByteLength2 = handlerSocket.Receive(imageByteArray);
+         imageByteLength = handlerSocket.Receive(imageByteArray);
 
-         string clientResponse = $"{ TimeStamp()} | File received ({ imageByteLength2.ToString() } bytes)";
-         handlerSocket.Send(System.Text.Encoding.ASCII.GetBytes(clientResponse), 0, maxByteLength, SocketFlags.None);
+         string clientResponse = $"{ TimeStamp()} | File received ({ imageByteLength.ToString() } bytes)";
+         handlerSocket.Send(System.Text.Encoding.ASCII.GetBytes(clientResponse));
          System.Console.WriteLine(clientResponse);
 
          System.IO.File.WriteAllBytes(filePath, imageByteArray);
