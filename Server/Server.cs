@@ -8,7 +8,7 @@ namespace Server
    {
       // const string serverIPAddress = "0.0.0.0"; const int serverPort = 11000;
       // //const string saveDir1 = @".\images\"; const string saveDir2 = @"..\html\images\"; // WINDOWS SLASH
-      // const string saveDir1 = "./images/"; const string saveDir2 = "../html/images/"; // LINUX SLASH
+      const string saveDir1 = "./images/"; const string saveDir2 = "../html/images/"; // LINUX SLASH
       // Random random = new Random();
       // static int currentImageCounter = 1;
       // static int maxImageCount = 30;
@@ -37,7 +37,7 @@ namespace Server
                string clientID = ReadSendString(handlerSocket);
 
                // 2. Receive fileByteArray
-               string filePathName = @".\images\BENCHMARK_CLIENT.jpg";
+               string filePathName = $"{ saveDir2 }01.jpg";
                ReadSendFile(handlerSocket, filePathName);
 
                // System.Console.WriteLine($"clientID: { clientID }");
