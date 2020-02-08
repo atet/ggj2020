@@ -84,7 +84,21 @@ namespace Server
       {
          int imageByteLength = Int32.Parse(ReadSendString(handlerSocket, maxByteLength));
          byte[] imageByteArray = new byte[imageByteLength];
-         imageByteLength = handlerSocket.Receive(imageByteArray);
+         //imageByteLength = handlerSocket.Receive(imageByteArray);
+
+         var total = 0;
+         do
+         {
+               var read = handlerSocket.Receive(imageByteArray, total, imageByteLength - total, SocketFlags.None);
+               Console.WriteLine("Client recieved {0} bytes", total);
+               if (read == 0)
+               {
+                  //If it gets here and you received 0 bytes it means that the Socket has Disconnected gracefully (without throwing exception) so you will need to handle that here
+               }
+               total += read;
+               //If you have sent 1024 bytes and Receive only 512 then it wil continue to recieve in the correct index thus when total is equal to 1024 you will have recieved all the bytes
+         }
+         while(total != imageByteLength);
 
          string clientResponse = $"{ TimeStamp()} | File received ({ imageByteLength.ToString() } bytes)";
          handlerSocket.Send(System.Text.Encoding.ASCII.GetBytes(clientResponse));
