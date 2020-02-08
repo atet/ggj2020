@@ -37,7 +37,7 @@ namespace Server
                string clientID = ReadSendString(handlerSocket);
 
                // 2. Receive fileByteArray
-               string filePathName = $"{ saveDir2 }01.jpg";
+               string filePathName = $"{ saveDir2 }1.jpg";
                ReadSendFile(handlerSocket, filePathName);
 
                // System.Console.WriteLine($"clientID: { clientID }");
