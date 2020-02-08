@@ -32,7 +32,7 @@ namespace Client
             SendReadString(serverSocket, GetClientID());
 
             // 2. Send fileByteArray
-            //SendReadFile(serverSocket, filePathName);
+            SendReadFile(serverSocket, filePathName);
 
             // Release the socket
             serverSocket.Shutdown(SocketShutdown.Both); serverSocket.Close(); System.Console.WriteLine(TimeStamp() + " | Gracefully closed connection.");
