@@ -15,11 +15,10 @@ namespace Server
 
       public static int Main(String[] args)
       {
-         //string serverHostName = "localhost";
+         string serverHostName = "localhost";
          int serverPort = 11000;
 
-         // IPAddress serverIPAddress = Dns.GetHostEntry(serverHostName).AddressList[0];
-         IPAddress serverIPAddress = Dns.GetHostAddresses("0.0.0.0")[0];
+         IPAddress serverIPAddress = Dns.GetHostEntry(serverHostName).AddressList[1];
          IPEndPoint serverEndPoint = new IPEndPoint(serverIPAddress, serverPort);
          Socket serverSocket = new Socket(serverIPAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
          serverSocket.Bind(serverEndPoint);
