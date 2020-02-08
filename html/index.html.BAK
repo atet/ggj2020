@@ -1,0 +1,228 @@
+<!DOCTYPE HTML>
+<!--
+	Multiverse by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Global Game Jam 2020: Team DERP!</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129017784-10"></script>
+			<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-129017784-10');
+		</script>
+
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="https://github.com/Bytesprite/paintingRestoration" target="_blank">Global Game Jam 2020: <strong>Thirty Second Restoration</strong> by Team DERP!</a></h1>
+						<nav>
+							<ul>
+								<li><a href="#footer" class="icon solid fa-info-circle">About</a></li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Main -->
+					<div id="main">
+						<article class="thumb">
+							<a href="images/1.jpg?t=" + new Date().getTime(); class="image"><img src="images/1.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/2.jpg?t=" + new Date().getTime(); class="image"><img src="images/2.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/3.jpg?t=" + new Date().getTime(); class="image"><img src="images/3.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/4.jpg?t=" + new Date().getTime(); class="image"><img src="images/4.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/5.jpg?t=" + new Date().getTime(); class="image"><img src="images/5.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/6.jpg?t=" + new Date().getTime(); class="image"><img src="images/6.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/7.jpg?t=" + new Date().getTime(); class="image"><img src="images/7.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/8.jpg?t=" + new Date().getTime(); class="image"><img src="images/8.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/9.jpg?t=" + new Date().getTime(); class="image"><img src="images/9.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/10.jpg?t=" + new Date().getTime(); class="image"><img src="images/10.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/11.jpg?t=" + new Date().getTime(); class="image"><img src="images/11.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/12.jpg?t=" + new Date().getTime(); class="image"><img src="images/12.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/13.jpg?t=" + new Date().getTime(); class="image"><img src="images/13.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/14.jpg?t=" + new Date().getTime(); class="image"><img src="images/14.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/15.jpg?t=" + new Date().getTime(); class="image"><img src="images/15.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/16.jpg?t=" + new Date().getTime(); class="image"><img src="images/16.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/17.jpg?t=" + new Date().getTime(); class="image"><img src="images/17.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/18.jpg?t=" + new Date().getTime(); class="image"><img src="images/18.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/19.jpg?t=" + new Date().getTime(); class="image"><img src="images/19.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/20.jpg?t=" + new Date().getTime(); class="image"><img src="images/20.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/21.jpg?t=" + new Date().getTime(); class="image"><img src="images/21.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/22.jpg?t=" + new Date().getTime(); class="image"><img src="images/22.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/23.jpg?t=" + new Date().getTime(); class="image"><img src="images/23.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/24.jpg?t=" + new Date().getTime(); class="image"><img src="images/24.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/25.jpg?t=" + new Date().getTime(); class="image"><img src="images/25.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/26.jpg?t=" + new Date().getTime(); class="image"><img src="images/26.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/27.jpg?t=" + new Date().getTime(); class="image"><img src="images/27.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/28.jpg?t=" + new Date().getTime(); class="image"><img src="images/28.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/29.jpg?t=" + new Date().getTime(); class="image"><img src="images/29.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+						<article class="thumb">
+							<a href="images/30.jpg?t=" + new Date().getTime(); class="image"><img src="images/30.jpg?t=" + new Date().getTime(); alt="" /></a>
+							<h2></h2>
+							<p></p>
+						</article>
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer" class="panel">
+							<div>
+								<section>
+									<h2>Thirty Second Restortation</h2>
+									<p><b>Welcome to the fastest fine art restoration service in the world</b>: Where quantity is paramount and we just get <i>stuff</i> done.</p></br>
+									<ul>
+										<li>Application Programming: Liam <a href="https://github.com/Bytesprite" target="_blank" class="icon brands fa-github"></a>, Nathaniel <a href="https://github.com/nalg" target="_blank" class="icon brands fa-github"></a></li>										
+										<li>2D Art: Lee <a href="https://github.com/Companionsheep" target="_blank" class="icon brands fa-github"></a></li>
+										<li>3D Art: Robbie <a href="https://github.com/rclrobertson" target="_blank" class="icon brands fa-github"></a></li>
+										<li>Back end and web development: Atet <a href="https://github.com/atet" target="_blank" class="icon brands fa-github"></a></li>
+									</ul>
+								</section>
+								<section>
+									<h2>Follow our project on...</h2>
+									<ul class="icons">
+										<li><a href="https://github.com/Bytesprite/paintingRestoration" target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+									</ul>
+								</section>
+								<p class="copyright">
+									&copy; 2020-∞,Team DERP!</a>
+								</p>
+							</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.poptrox.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+	</body>
+</html>
