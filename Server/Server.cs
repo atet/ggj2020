@@ -15,7 +15,7 @@ namespace Server
 
       public static int Main(String[] args)
       {
-         string serverHostName = "0.0.0.0"; // string serverHostName = "localhost";
+         string serverHostName = "localhost";
          int serverPort = 11000;
 
          IPAddress serverIPAddress = Dns.GetHostEntry(serverHostName).AddressList[0];
