@@ -79,18 +79,18 @@ namespace Server
          System.Console.WriteLine(clientResponse);
          return clientMessage;
       }
-      // public static void ReadSendFile(Socket handlerSocket, string filePath, int maxByteLength = 1024)
-      // {
-      //    int imageByteLength = Int32.Parse(ReadSendString(handlerSocket, maxByteLength));
-      //    byte[] imageByteArray = new byte[imageByteLength];
-      //    int imageByteLength2 = handlerSocket.Receive(imageByteArray, 0, imageByteLength, SocketFlags.None);
+      public static void ReadSendFile(Socket handlerSocket, string filePath, int maxByteLength = 1024)
+      {
+         int imageByteLength = Int32.Parse(ReadSendString(handlerSocket, maxByteLength));
+         byte[] imageByteArray = new byte[imageByteLength];
+         int imageByteLength2 = handlerSocket.Receive(imageByteArray);
 
-      //    string clientResponse = $"{ TimeStamp()} | File received ({ imageByteLength2.ToString() } bytes)";
-      //    handlerSocket.Send(System.Text.Encoding.ASCII.GetBytes(clientResponse), 0, maxByteLength, SocketFlags.None);
-      //    System.Console.WriteLine(clientResponse);
+         string clientResponse = $"{ TimeStamp()} | File received ({ imageByteLength2.ToString() } bytes)";
+         handlerSocket.Send(System.Text.Encoding.ASCII.GetBytes(clientResponse), 0, maxByteLength, SocketFlags.None);
+         System.Console.WriteLine(clientResponse);
 
-      //    System.IO.File.WriteAllBytes(filePath, imageByteArray);
-      // }
+         System.IO.File.WriteAllBytes(filePath, imageByteArray);
+      }
 
 
       // public void ReceiveSendOnStream(Object obj)
