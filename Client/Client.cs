@@ -32,7 +32,7 @@ namespace Client
             SendReadString(serverSocket, GetClientID());
 
             // 2. Send fileByteArray
-            SendReadFile(serverSocket, filePathName);
+            //SendReadFile(serverSocket, filePathName);
 
             // Release the socket
             serverSocket.Shutdown(SocketShutdown.Both); serverSocket.Close(); System.Console.WriteLine(TimeStamp() + " | Gracefully closed connection.");
@@ -45,25 +45,27 @@ namespace Client
       }
       public static void SendReadString(Socket serverSocket, string clientMessage, int maxByteLength = 1024)
       {
+         serverSocket.Send(System.Text.Encoding.ASCII.GetBytes(clientMessage));
          byte[] serverMessageByteArray = new byte[maxByteLength];
-         serverSocket.Send(System.Text.Encoding.ASCII.GetBytes(clientMessage), 0, maxByteLength, SocketFlags.None);
-         int byteLength = serverSocket.Receive(serverMessageByteArray, 0, maxByteLength, SocketFlags.None);
+         int byteLength = serverSocket.Receive(serverMessageByteArray);
          System.Console.WriteLine(System.Text.Encoding.ASCII.GetString(serverMessageByteArray, 0, byteLength));
       }
-      public static void SendReadFile(Socket serverSocket, string filePath, int maxByteLength = 1024)
-      {
-         byte[] imageByteArray = System.IO.File.ReadAllBytes(filePath);
-         // Determine file's byte length
-         SendReadString(serverSocket, imageByteArray.Length.ToString());
-         // Send file
-         serverSocket.Send(imageByteArray, 0, imageByteArray.Length, SocketFlags.None);
 
-         // Received confirmation
-         byte[] serverMessageByteArray = new byte[maxByteLength];
-         int byteLength = serverSocket.Receive(serverMessageByteArray, 0, maxByteLength, SocketFlags.None);
-         System.Console.WriteLine(System.Text.Encoding.ASCII.GetString(serverMessageByteArray, 0, byteLength));
 
-      }
+      // public static void SendReadFile(Socket serverSocket, string filePath, int maxByteLength = 1024)
+      // {
+      //    byte[] imageByteArray = System.IO.File.ReadAllBytes(filePath);
+      //    // Determine file's byte length
+      //    SendReadString(serverSocket, imageByteArray.Length.ToString());
+      //    // Send file
+      //    serverSocket.Send(imageByteArray, 0, imageByteArray.Length, SocketFlags.None);
+
+      //    // Received confirmation
+      //    byte[] serverMessageByteArray = new byte[maxByteLength];
+      //    int byteLength = serverSocket.Receive(serverMessageByteArray, 0, maxByteLength, SocketFlags.None);
+      //    System.Console.WriteLine(System.Text.Encoding.ASCII.GetString(serverMessageByteArray, 0, byteLength));
+
+      // }
 
 
       // const string serverIPAddress = "ggj.atetkao.com"; const int serverPort = 11000; // const string serverIPAddress = "127.0.0.1"; const int serverPort = 11000;
