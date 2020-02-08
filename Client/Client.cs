@@ -56,7 +56,7 @@ namespace Client
          // Determine file's byte length
          SendReadString(serverSocket, imageByteArray.Length.ToString());
          // Send file
-         serverSocket.Send(imageByteArray);
+         serverSocket.Send(imageByteArray, 0, imageByteArray.Length, SocketFlags.None);
          // Received confirmation
          byte[] serverMessageByteArray = new byte[maxByteLength];
          int byteLength = serverSocket.Receive(serverMessageByteArray);
