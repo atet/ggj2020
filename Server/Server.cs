@@ -83,7 +83,7 @@ namespace Server
       {
          int imageByteLength = Int32.Parse(ReadSendString(handlerSocket, maxByteLength));
          byte[] imageByteArray = new byte[imageByteLength];
-         imageByteLength = handlerSocket.Receive(imageByteArray);
+         imageByteLength = handlerSocket.Receive(imageByteArray, 0, imageByteLength, SocketFlags.None);
 
          string clientResponse = $"{ TimeStamp()} | File received ({ imageByteLength.ToString() } bytes)";
          handlerSocket.Send(System.Text.Encoding.ASCII.GetBytes(clientResponse));
