@@ -1,26 +1,24 @@
 ﻿using System;
-using System.Net.Sockets;
-
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Text.RegularExpressions;
 
 namespace Client
 {
    public class Client
    {
+      // public static int Main(String[] args)
+      // {
+      //    string serverHostName = "ggj.atetkao.com"; // string serverHostName = "localhost";
+      //    int serverPort = 11000;
 
-      public static int Main(String[] args)
-      {
-         string serverHostName = "ggj.atetkao.com"; // string serverHostName = "localhost";
-         int serverPort = 11000;
+      //    string filePathName = @".\images\BENCHMARK_CLIENT.jpg";
+      //    Send(serverHostName, serverPort, filePathName);
+      //    return 0;         
+      // }
 
-         string filePathName = @".\images\BENCHMARK_CLIENT.jpg";
-         Send(serverHostName, serverPort, filePathName);
-         return 0;         
-      }
-
-      public static void Send(string serverHostName, int serverPort, string filePathName)
+      public static void Send(string filePathName, string serverHostName = "ggj.atetkao.com", int serverPort = 11000)
       {
          // Connect to server
          IPAddress serverIPAddress = Dns.GetHostEntry(serverHostName).AddressList[0];
