@@ -76,7 +76,7 @@ namespace Server
          }
          while(total != imageByteLength);
 
-         string clientResponse = $"{ TimeStamp()} | File received ({ imageByteLength.ToString() } bytes)";
+         string clientResponse = $"{ TimeStamp()} | File received ({ imageByteLength.ToString() } bytes), saved as { filePath }";
          handlerSocket.Send(System.Text.Encoding.ASCII.GetBytes(clientResponse));
          System.Console.WriteLine(clientResponse);
 
