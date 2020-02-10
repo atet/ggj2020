@@ -1,1 +1,0 @@
-<img src="./images/1.jpg?t=" + new Date().getTime(); alt="" width="400" height="225">
