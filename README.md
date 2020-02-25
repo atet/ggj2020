@@ -2,8 +2,10 @@
 
 # Global Game Jam 2020: Rapid Restoration
 
-## Networking back-end server daemon, website, and front-end function
+## Networking back-end server daemon, front-end functions, and website
 
-* Back-end serve code in C#/.Net
-* Website in HTML5/CSS3
+**Website currently down for maintenance**
+
+* Back-end server code in C#/.Net
 * "Front-end" functions in C# to interface with Unity Game Engine
+* Website in HTML5/CSS3 (https://ggj.atetkao.com)
