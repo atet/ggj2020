@@ -4,8 +4,9 @@
 
 ## Networking back-end server daemon, front-end functions, and website
 
-**Website currently down for maintenance**
-
+* Images made in the program are sent to an external website
 * Back-end server code in C#/.Net
 * "Front-end" functions in C# to interface with Unity Game Engine
-* Website in HTML5/CSS3 (https://ggj.atetkao.com)
+* Download desktop application here: https://globalgamejam.org/2020/games/rapid-restoration-4
+* Website in HTML5/CSS3: <strike>https://ggj.atetkao.com</strike> (Currently not hosted)
+* Main repository for program: https://github.com/Bytesprite/paintingRestoration
